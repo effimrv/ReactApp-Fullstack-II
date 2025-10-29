@@ -1,5 +1,69 @@
 # Getting Started with Create React App
+# LevelUpGamer React
 
+Bienvenido a LevelUpGamer, una tienda online de periféricos y accesorios gaming desarrollada con React.
+
+## Tecnologías principales
+- React
+- React Router
+- Bootstrap
+- React Icons
+- JavaScript (ES6+)
+
+## Estructura del proyecto
+```
+levelupgamer-react/
+├── public/
+├── src/
+│   ├── Componentes/
+│   ├── Data/
+│   ├── Paginas/
+│   ├── Styles/
+│   ├── Tests/
+│   └── Utils/
+├── package.json
+└── README.md
+```
+
+## Instalación
+1. Clona el repositorio:
+	```bash
+	git clone https://github.com/effimrv/ReactApp-Fullstack-II.git
+	```
+2. Ingresa a la carpeta del proyecto:
+	```bash
+	cd levelupgamer-react
+	```
+3. Instala las dependencias:
+	```bash
+	npm install
+	```
+
+## Ejecución
+Para iniciar la aplicación en modo desarrollo:
+```bash
+npm start
+```
+La app estará disponible en `http://localhost:3000`.
+
+## Funcionalidades
+- Página principal con productos destacados
+- Detalle de productos
+- Carrito de compras
+- Registro y login de usuario
+- Contacto y sección de información
+
+## Tests
+Ejecuta los tests con:
+```bash
+npm test
+```
+
+## Autor
+- Effimrv
+
+---
+¡Gracias por visitar LevelUpGamer!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

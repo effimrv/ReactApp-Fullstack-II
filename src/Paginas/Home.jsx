@@ -22,39 +22,47 @@ const Home = () => {
     <div>
       {}
       <section className="hero-section position-relative py-5" style={{ 
-          minHeight: '80vh',
-          background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-color) 100%)',
-          overflow: 'hidden'
+            minHeight: '80vh',
+            background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-color) 100%)',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
         }}>
-        <div className="container-fluid py-5 px-5">
-          <div className="row align-items-center">
-            <div className="col-lg-6">
+          <div className="container-fluid py-5 px-5" style={{ width: '100%' }}>
+            <div className="row align-items-center justify-content-center">
+              <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center" style={{ height: '100%' }}>
               <h1 className="display-3 fw-bold mb-4 text-white" style={{ letterSpacing: '-0.02em' }}>
                 Eleva tu <span style={{ color: '#e0e7ff' }}>Experiencia</span> Gaming
               </h1>
-              <p className="lead mb-4 text-white-200" style={{ fontSize: '1.25rem', maxWidth: '500px' }}>
+                <p className="lead mb-4 text-white-200 text-center" style={{ fontSize: '1.25rem', maxWidth: '500px' }}>
                 Encuentra los periféricos y accesorios más avanzados para maximizar tu rendimiento en el juego.
               </p>
-              <Link to="/productos" className="btn btn-light btn-lg" style={{
-                borderRadius: 'var(--border-radius)',
-                padding: '0.75rem 2rem',
-                transition: 'var(--transition)',
-                boxShadow: 'var(--shadow-md)'
-              }}>
-                Explorar Productos <FaArrowRight className="ms-2" />
-              </Link>
+                <Link to="/productos" className="btn btn-light btn-lg" style={{
+                  borderRadius: 'var(--border-radius)',
+                  padding: '0.75rem 2rem',
+                  transition: 'var(--transition)',
+                  boxShadow: 'var(--shadow-md)',
+                  margin: '0 auto',
+                  display: 'block'
+                }}>
+                  Explorar Productos <FaArrowRight className="ms-2" />
+                </Link>
             </div>
             <div className="col-lg-6 text-center position-relative">
               <img
-                src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80"
+                src="https://media.istockphoto.com/id/1560833158/es/foto/controlador-de-juego-con-teclado-iluminado-de-color-p%C3%BArpura-en-medio-de-varios-dispositivos.jpg?s=612x612&w=0&k=20&c=VcOavuq_yYYY_prnW6qehysZIA_xxCKOYiTtPUR0XyI="
                 alt="Setup Gaming Profesional"
                 className="img-fluid"
                 style={{
-                  maxHeight: '600px',
-                  width: 'auto',
+                  maxHeight: '700px',
+                  width: '60%',
+                  minWidth: '110px',
                   borderRadius: 'var(--border-radius-lg)',
                   boxShadow: 'var(--shadow-lg)',
                   transform: 'perspective(1000px) rotateY(-5deg)',
+                  objectFit: 'cover',
+                  margin: '0 auto'
                 }}
               />
             </div>
