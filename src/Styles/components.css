@@ -1,0 +1,100 @@
+/* Estilos modernos para componentes */
+
+/* Botones */
+.btn {
+  border-radius: var(--border-radius);
+  padding: 0.625rem 1.25rem;
+  transition: var(--transition);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Imágenes */
+.img-fluid {
+  border-radius: var(--border-radius);
+}
+
+/* Navegación */
+.nav-link {
+  font-weight: 500;
+  color: var(--gray-700);
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+/* Contenedores */
+.container, .container-fluid {
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  font-weight: 400;
+  color: var(--gray-600);
+}
+
+/* Fondos y secciones */
+.bg-gradient {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
+.section-padding {
+  padding: var(--spacing-10) 0;
+}
+
+/* Efectos hover */
+.hover-lift {
+  transition: var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Inputs y formularios */
+.form-control {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-200);
+  padding: 0.75rem 1rem;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}

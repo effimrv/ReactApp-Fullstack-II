@@ -1,0 +1,23 @@
+/* Personalizaciones mínimas sobre Bootstrap */
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.min-vh-50 {
+  min-height: 50vh;
+}
