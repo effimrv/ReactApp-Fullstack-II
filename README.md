@@ -42,7 +42,7 @@ levelupgamer-react/
 ## Ejecución
 Para iniciar la aplicación en modo desarrollo:
 ```bash
-npm start
+npm run dev
 ```
 La app estará disponible en `http://localhost:3000`.
 
