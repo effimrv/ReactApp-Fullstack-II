@@ -46,16 +46,11 @@ const Nosotros = () => {
                 LevelUpGamer es una tienda online dedicada a productos gamers de alta calidad. 
               </p>
               <p>
-                Desde 2020, hemos estado comprometidos con brindar la mejor experiencia de compra 
+                Desde 2025, hemos estado comprometidos con brindar la mejor experiencia de compra 
                 a jugadores de todos los niveles.
               </p>
             </div>
             <div className="col-lg-6">
-              <img 
-                src="/images/about-team.jpg" 
-                alt="Equipo LevelUpGamer"
-                className="img-fluid rounded shadow"
-              />
             </div>
           </div>
         </div>
@@ -109,29 +104,6 @@ const Nosotros = () => {
                     </div>
                     <h5>{valor.titulo}</h5>
                     <p className="text-muted">{valor.descripcion}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Equipo */}
-      <section className="bg-light py-5">
-        <div className="container">
-          <h2 className="text-center display-5 fw-bold mb-5">Nuestro Equipo</h2>
-          <div className="row g-4">
-            {equipo.map((miembro, index) => (
-              <div key={index} className="col-md-6">
-                <div className="card border-0 shadow-sm h-100 text-center">
-                  <div className="card-body p-4">
-                    <div className="text-primary mb-3" style={{fontSize: '3rem'}}>
-                      {miembro.icono}
-                    </div>
-                    <h5>{miembro.nombre}</h5>
-                    <h6 className="text-primary">{miembro.rol}</h6>
-                    <p>{miembro.descripcion}</p>
                   </div>
                 </div>
               </div>

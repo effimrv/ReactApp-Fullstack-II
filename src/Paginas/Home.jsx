@@ -32,7 +32,7 @@ const Home = () => {
               <h1 className="display-3 fw-bold mb-4 text-white" style={{ letterSpacing: '-0.02em' }}>
                 Eleva tu <span style={{ color: '#e0e7ff' }}>Experiencia</span> Gaming
               </h1>
-              <p className="lead mb-4 text-gray-200" style={{ fontSize: '1.25rem', maxWidth: '500px' }}>
+              <p className="lead mb-4 text-white-200" style={{ fontSize: '1.25rem', maxWidth: '500px' }}>
                 Encuentra los periféricos y accesorios más avanzados para maximizar tu rendimiento en el juego.
               </p>
               <Link to="/productos" className="btn btn-light btn-lg" style={{

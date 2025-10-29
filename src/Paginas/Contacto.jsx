@@ -48,7 +48,7 @@ const Contacto = () => {
   };
 
   const infoContacto = [
-    { icono: <FaMapMarkerAlt />, titulo: 'Dirección', contenido: 'Av. Siempre Viva 742, Santiago' },
+    { icono: <FaMapMarkerAlt />, titulo: 'Dirección', contenido: 'Av. Brasil 2021, Valparaíso' },
     { icono: <FaPhone />, titulo: 'Teléfono', contenido: '+56 9 1234 5678' },
     { icono: <FaEnvelope />, titulo: 'Email', contenido: 'info@levelupgamer.cl' },
     { icono: <FaClock />, titulo: 'Horario', contenido: 'Lun-Vie: 9:00 - 18:00' }

@@ -34,7 +34,7 @@ export const productos = [
     nombre: "Xbox Series X",
     precio: 529990,
     categoria: "consolas",
-    imagen: "https://images.unsplash.com/photo-1621259182978-fbf83265f8c5?w=400&h=300&fit=crop",
+    imagen: "https://home.ripley.cl/store/Attachment/WOP/D172/2000381174756/2000381174756_2.jpg",
     descripcion: "Potencia de 12 teraflops y compatibilidad con 8K",
     rating: 4.6,
     stock: 12
@@ -44,7 +44,7 @@ export const productos = [
     nombre: "Teclado Mecánico RGB",
     precio: 89990,
     categoria: "perifericos",
-    imagen: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_Q_NP_881451-MLA95845609549_102025-F.webp",
     descripcion: "Teclado mecánico con switches azules y RGB",
     rating: 4.4,
     stock: 30
@@ -54,7 +54,7 @@ export const productos = [
     nombre: "Steam Deck",
     precio: 599990,
     categoria: "consolas",
-    imagen: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_Q_NP_925474-MLU78977771517_092024-F.webp",
     descripcion: "Consola portátil para jugar tu biblioteca de Steam",
     rating: 4.2,
     stock: 8
@@ -74,7 +74,7 @@ export const productos = [
     nombre: "PlayStation VR2",
     precio: 699990,
     categoria: "realidad-virtual",
-    imagen: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_946299-MLA95234000906_102025-F.webp",
     descripcion: "Gafas de realidad virtual para PS5",
     rating: 4.3,
     stock: 10
@@ -84,7 +84,7 @@ export const productos = [
     nombre: "Monitor Gamer 240Hz",
     precio: 449990,
     categoria: "monitores",
-    imagen: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop",
+    imagen: "https://www.alcaplus.cl/media/2025/04/276c0abc-4a03-4542-afc6-e95c7133eef1-155430-1200-1200-1-1200x1200.jpeg",
     descripcion: "Monitor QHD 27 pulgadas con 240Hz",
     rating: 4.8,
     stock: 15
@@ -94,7 +94,7 @@ export const productos = [
     nombre: "Meta Quest 3",
     precio: 799990,
     categoria: "realidad-virtual",
-    imagen: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=400&h=300&fit=crop",
+    imagen: "https://media.falabella.com/falabellaCL/144416189_01/w=800,h=800,fit=pad",
     descripcion: "Gafas VR todo-en-uno con color passthrough",
     rating: 4.4,
     stock: 18
@@ -104,7 +104,7 @@ export const productos = [
     nombre: "Silla Gamer Ergonómica",
     precio: 299990,
     categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_Q_NP_933773-MLA96118033003_102025-F.webp",
     descripcion: "Silla ergonómica con soporte lumbar",
     rating: 4.6,
     stock: 12
@@ -114,7 +114,7 @@ export const productos = [
     nombre: "Alfombrilla XL RGB",
     precio: 34990,
     categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1591030434469-3d78c7b12820?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_Q_NP_925105-MLA95734971672_102025-F.webp",
     descripcion: "Alfombrilla gaming con iluminación RGB",
     rating: 4.2,
     stock: 40
@@ -124,7 +124,7 @@ export const productos = [
     nombre: "Webcam 4K",
     precio: 79990,
     categoria: "perifericos",
-    imagen: "https://images.unsplash.com/photo-1558089687-b785ad8f6f3e?w=400&h=300&fit=crop",
+    imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_963591-MLA96136985867_102025-F.webp",
     descripcion: "Cámara web 4K para streaming y videollamadas",
     rating: 4.3,
     stock: 25
