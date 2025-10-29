@@ -58,10 +58,6 @@ Ejecuta los tests con:
 ```bash
 npm test
 ```
-
-## Autor
-- Effimrv
-
 ---
 ¡Gracias por visitar LevelUpGamer!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
