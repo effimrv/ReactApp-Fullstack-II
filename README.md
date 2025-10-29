@@ -37,6 +37,8 @@ levelupgamer-react/
 3. Instala las dependencias:
 	```bash
 	npm install
+ 	npm install react-scripts
+ 	npm install react-icons
 	```
 
 ## Ejecución
