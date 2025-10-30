@@ -1,12 +1,12 @@
 :root {
   /* Colores principales - Tema moderno y minimalista */
-  --primary-color: #6090f7;
-  --primary-dark: #4068b3;
-  --primary-light: #686b8d;
-  --secondary-color: #7192ce;
-  --accent-color: #5a76d1;
-  --success-color: #10b981;
-  --danger-color: #ef4444;
+  --primary-color: #00ff00;          
+  --primary-dark: #00cc00;           
+  --primary-light: #66ff66;          
+  --secondary-color: #7DF9FF;        
+  --accent-color: #7DF9FF;           
+  --success-color: #00ff00;          
+  --danger-color: #ff0000;   
   
   /* Escala de grises */
   --gray-50: #f8fafc;
