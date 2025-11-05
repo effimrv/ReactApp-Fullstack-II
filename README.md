@@ -61,7 +61,7 @@ Ejecuta los tests con:
 npm test
 ```
 ## Para abrir en cmd
-cd C:\Users\PC01\OneDrive\Desktop\ReactApp-Fullstack-II-1
+- cd C:\Users\PC01\OneDrive\Desktop\ReactApp-Fullstack-II-1
 ---
 ¡Gracias por visitar LevelUpGamer!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
