@@ -9,6 +9,7 @@ const ProductoDetalle = () => {
   const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const [cantidad, setCantidad] = useState(1);
+  const [toast, setToast] = useState({ visible: false, message: '' });
 
   useEffect(() => {
     const productoData = obtenerProductoPorId(id);
@@ -24,7 +25,10 @@ const ProductoDetalle = () => {
       localStorageService.agregarAlCarrito(producto);
     }
     window.dispatchEvent(new Event('storage'));
-    alert(`¡${cantidad} ${producto.nombre} agregado(s) al carrito!`);
+  // Mostrar toast en vez de alert
+  setToast({ visible: true, message: `¡${cantidad} ${producto.nombre} agregado(s) al carrito!` });
+  // Ocultar después de 3s
+  setTimeout(() => setToast({ visible: false, message: '' }), 3000);
   };
 
   if (!producto) {
@@ -48,85 +52,103 @@ const ProductoDetalle = () => {
       </nav>
 
       <div className="row">
-        <div className="col-md-6">
-          <img 
-            src={producto.imagen} 
-            alt={producto.nombre}
-            className="img-fluid rounded shadow"
-          />
-        </div>
-        
-        <div className="col-md-6">
-          <h1 className="display-6 fw-bold mb-3">{producto.nombre}</h1>
-          
-          <div className="d-flex align-items-center mb-3">
-            <div className="text-warning me-2">
-              <FaStar className="text-warning" />
-              <span className="ms-1">{producto.rating}</span>
-            </div>
-            <span className="text-muted">(128 reseñas)</span>
-          </div>
-
-          <h2 className="text-primary mb-4">${producto.precio.toLocaleString('es-CL')}</h2>
-          
-          <p className="lead mb-4">{producto.descripcion}</p>
-
-          <div className="mb-4">
-            <span className={`badge ${producto.stock > 0 ? 'bg-success' : 'bg-danger'}`}>
-              {producto.stock > 0 ? 'En Stock' : 'Agotado'}
-            </span>
-          </div>
-
-          <div className="row g-3 align-items-center mb-4">
-            <div className="col-auto">
-              <label className="form-label fw-bold">Cantidad:</label>
-            </div>
-            <div className="col-auto">
-              <div className="input-group" style={{width: '120px'}}>
-                <button 
-                  className="btn btn-outline-secondary"
-                  onClick={() => setCantidad(Math.max(1, cantidad - 1))}
-                >
-                  -
-                </button>
-                <input 
-                  type="text" 
-                  className="form-control text-center" 
-                  value={cantidad}
-                  readOnly
+        <div className="col-12">
+          <div className="detalle-flex d-flex flex-column flex-md-row">
+            <div className="detalle-left pe-md-3">
+              <div className="detalle-imagen-contenedor rounded shadow">
+                <img
+                  src={producto.imagen}
+                  alt={producto.nombre}
+                  className="img-fluid"
                 />
-                <button 
-                  className="btn btn-outline-secondary"
-                  onClick={() => setCantidad(cantidad + 1)}
-                >
-                  +
-                </button>
+              </div>
+            </div>
+
+            <div className="detalle-right ps-md-3 d-flex flex-column">
+              <div className="detalle-contenido">
+                <h1 className="display-6 fw-bold mb-3">{producto.nombre}</h1>
+
+                <div className="d-flex align-items-center mb-3">
+                  <div className="text-warning me-2">
+                    <FaStar className="text-warning" />
+                    <span className="ms-1">{producto.rating}</span>
+                  </div>
+                  <span className="text-muted">(128 reseñas)</span>
+                </div>
+
+                <h2 className="text-primary mb-4">${producto.precio.toLocaleString('es-CL')}</h2>
+
+                <p className="lead mb-4">{producto.descripcion}</p>
+
+                <div className="mb-4">
+                  <span className={`badge ${producto.stock > 0 ? 'bg-success' : 'bg-danger'}`}>
+                    {producto.stock > 0 ? 'En Stock' : 'Agotado'}
+                  </span>
+                </div>
+
+                <div className="row g-3 align-items-center mb-4">
+                  <div className="col-auto">
+                    <label className="form-label fw-bold">Cantidad:</label>
+                  </div>
+                  <div className="col-auto">
+                    <div className="input-group" style={{width: '120px'}}>
+                      <button 
+                        className="btn btn-outline-secondary"
+                        onClick={() => setCantidad(Math.max(1, cantidad - 1))}
+                      >
+                        -
+                      </button>
+                      <input 
+                        type="text" 
+                        className="form-control text-center" 
+                        value={cantidad}
+                        readOnly
+                      />
+                      <button 
+                        className="btn btn-outline-secondary"
+                        onClick={() => setCantidad(cantidad + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="d-flex gap-3">
+                  <button 
+                    className="btn btn-primary btn-lg flex-fill"
+                    onClick={manejarAgregarCarrito}
+                    disabled={producto.stock === 0}
+                  >
+                    <FaShoppingCart className="me-2" />
+                    Agregar al Carrito
+                  </button>
+                  <button className="btn btn-outline-primary btn-lg">
+                    Comprar Ahora
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-3 mt-md-4 mt-auto">
+                <Link to="/productos" className="btn btn-outline-secondary">
+                  <FaArrowLeft className="me-2" />
+                  Volver a Productos
+                </Link>
               </div>
             </div>
           </div>
-
-          <div className="d-flex gap-3">
-            <button 
-              className="btn btn-primary btn-lg flex-fill"
-              onClick={manejarAgregarCarrito}
-              disabled={producto.stock === 0}
-            >
-              <FaShoppingCart className="me-2" />
-              Agregar al Carrito
-            </button>
-            <button className="btn btn-outline-primary btn-lg">
-              Comprar Ahora
-            </button>
-          </div>
-
-          <div className="mt-4">
-            <Link to="/productos" className="btn btn-outline-secondary">
-              <FaArrowLeft className="me-2" />
-              Volver a Productos
-            </Link>
-          </div>
         </div>
       </div>
+      {/* Toast local */}
+      {toast.visible && (
+        <div style={{position: 'fixed', right: 20, top: 80, zIndex: 3000}}>
+          <div className="card shadow" style={{background: 'rgba(0,0,0,0.8)', color: '#fff'}}>
+            <div className="card-body py-2 px-3 small">
+              {toast.message}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

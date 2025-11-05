@@ -21,9 +21,8 @@ const ProductoCard = ({ producto }) => {
       <div className="position-relative">
         <img 
           src={producto.imagen || ''}
-          className="card-img-top"
+          className="card-img-top img-fixed"
           alt={producto.nombre}
-          style={{height: '200px', objectFit: 'cover'}}
         />
         <div className="position-absolute top-0 end-0 m-2">
           <button 

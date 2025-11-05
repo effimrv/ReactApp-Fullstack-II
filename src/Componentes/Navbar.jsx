@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import { authService } from '../Utils/Auth';
 import { carritoUsuarioService } from '../Data/carritoUsuario';
+import { localStorageService } from '../Data/localStorage';
 
 const Navbar = () => {
   const [contadorCarrito, setContadorCarrito] = useState(0);
@@ -16,9 +17,9 @@ const Navbar = () => {
     const actualizarEstado = () => {
       const usuarioActual = authService.obtenerUsuarioActual();
       setUsuario(usuarioActual);
-      
-      const carrito = usuarioActual ? carritoUsuarioService.obtenerCarrito() : [];
-      const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+  // Si hay usuario, usamos el carrito por usuario; si no, usamos el carrito local
+  const carrito = usuarioActual ? carritoUsuarioService.obtenerCarrito() : localStorageService.obtenerCarrito();
+  const total = (carrito || []).reduce((sum, item) => sum + (item.cantidad || 0), 0);
       setContadorCarrito(total);
     };
 
