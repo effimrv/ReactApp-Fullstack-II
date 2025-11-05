@@ -20,7 +20,7 @@ const ProductoCard = ({ producto }) => {
     <div className="card h-100 shadow-sm">
       <div className="position-relative">
         <img 
-          src={producto.imagen || imagenes.productoPlaceholder}
+          src={producto.imagen || ''}
           className="card-img-top"
           alt={producto.nombre}
           style={{height: '200px', objectFit: 'cover'}}

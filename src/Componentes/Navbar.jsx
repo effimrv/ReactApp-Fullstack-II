@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import { authService } from '../Utils/Auth';
@@ -7,6 +7,8 @@ import { carritoUsuarioService } from '../Data/carritoUsuario';
 const Navbar = () => {
   const [contadorCarrito, setContadorCarrito] = useState(0);
   const [usuario, setUsuario] = useState(null);
+  const [menuAbierto, setMenuAbierto] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -28,9 +30,22 @@ const Navbar = () => {
   const manejarLogout = () => {
     authService.logout();
     setUsuario(null);
+    setMenuAbierto(false);
     setContadorCarrito(0);
     navigate('/');
   };
+
+  // Cerrar dropdown cuando se hace click afuera
+  useEffect(() => {
+    const manejarClickFuera = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setMenuAbierto(false);
+      }
+    };
+
+    document.addEventListener('mousedown', manejarClickFuera);
+    return () => document.removeEventListener('mousedown', manejarClickFuera);
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
@@ -83,25 +98,39 @@ const Navbar = () => {
             </Link>
 
             {usuario ? (
-              <div className="dropdown">
-                <button 
-                  className="btn btn-outline-secondary dropdown-toggle"
+              <div className="position-relative" ref={dropdownRef}>
+                <button
+                  className="btn btn-outline-secondary d-flex align-items-center"
                   type="button"
-                  data-bs-toggle="dropdown"
+                  onClick={() => setMenuAbierto((v) => !v)}
+                  aria-expanded={menuAbierto}
                 >
                   <FaUser className="me-1" />
                   {usuario.nombre.split(' ')[0]}
+                  <span
+                    className="ms-2"
+                    style={{
+                      display: 'inline-block',
+                      transition: 'transform 150ms ease',
+                      transform: menuAbierto ? 'rotate(180deg)' : 'rotate(0deg)'
+                    }}
+                    aria-hidden
+                  >
+                    ▼
+                  </span>
                 </button>
-                <ul className="dropdown-menu">
-                  <li><span className="dropdown-item-text small text-muted">{usuario.email}</span></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li>
-                    <button className="dropdown-item" onClick={manejarLogout}>
-                      <FaSignOutAlt className="me-1" />
-                      Cerrar Sesión
-                    </button>
-                  </li>
-                </ul>
+
+                {menuAbierto && (
+                  <div className="card shadow-sm position-absolute end-0 mt-2" style={{ minWidth: 200, zIndex: 2000 }}>
+                    <div className="card-body p-2">
+                      <div className="small text-muted px-2">{usuario.email}</div>
+                      <hr className="my-2" />
+                      <button className="btn btn-link w-100 text-start" onClick={manejarLogout}>
+                        <FaSignOutAlt className="me-1" /> Cerrar Sesión
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <Link to="/login" className="btn btn-outline-secondary">
