@@ -4,6 +4,7 @@ import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import { authService } from '../Utils/Auth';
 import { carritoUsuarioService } from '../Data/carritoUsuario';
 import { localStorageService } from '../Data/localStorage';
+import QuickAdminModal from './QuickAdminModal';
 
 const Navbar = () => {
   const [contadorCarrito, setContadorCarrito] = useState(0);
@@ -34,6 +35,34 @@ const Navbar = () => {
     setMenuAbierto(false);
     setContadorCarrito(0);
     navigate('/');
+  };
+
+  const [showAdminModal, setShowAdminModal] = useState(false);
+
+  const handleQuickAdmin = () => {
+    const email = 'admin@admin.com';
+    const password = 'admin';
+
+    // Intentar login; si no existe el usuario, registrarlo
+    const intento = authService.login(email, password);
+    if (intento && intento.exito) {
+      setUsuario(intento.usuario);
+      navigate('/admin');
+      return;
+    }
+
+    const registro = authService.registrar(email, password, 'Admin Test');
+    if (registro && registro.exito) {
+      setUsuario(registro.usuario);
+      navigate('/admin');
+      return;
+    }
+
+    // Fallback: crear directamente el objeto en localStorage
+    const usuarioFake = { id: Date.now(), email, nombre: 'Admin Test', role: 'admin' };
+    localStorage.setItem('levelupgamer_usuario', JSON.stringify(usuarioFake));
+    setUsuario(usuarioFake);
+    navigate('/admin');
   };
 
   // Cerrar dropdown cuando se hace click afuera
@@ -86,6 +115,13 @@ const Navbar = () => {
                 Contacto
               </Link>
             </li>
+            {usuario && usuario.role === 'admin' && (
+              <li className="nav-item">
+                <Link to="/admin" className={`nav-link ${location.pathname.startsWith('/admin') ? 'active fw-bold' : ''}`}>
+                  Admin
+                </Link>
+              </li>
+            )}
           </ul>
 
           <div className="d-flex align-items-center gap-2">
@@ -97,6 +133,14 @@ const Navbar = () => {
                 </span>
               )}
             </Link>
+
+            {/* Botón rápido para pruebas: abrir modal para entrar como admin cuando no hay usuario */}
+            {!usuario && (
+              <>
+                <button className="btn btn-primary" onClick={() => setShowAdminModal(true)} title="Entrar como admin de pruebas">Entrar como admin</button>
+                <QuickAdminModal show={showAdminModal} onClose={() => setShowAdminModal(false)} onConfirm={() => { setShowAdminModal(false); handleQuickAdmin(); }} />
+              </>
+            )}
 
             {usuario ? (
               <div className="position-relative" ref={dropdownRef}>

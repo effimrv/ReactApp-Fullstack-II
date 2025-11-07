@@ -1,4 +1,4 @@
-export const productos = [
+const INICIAL_PRODUCTOS = [
   {
     id: 1,
     nombre: "PlayStation 5",
@@ -139,8 +139,48 @@ export const categorias = [
   { id: 'monitores', nombre: 'Monitores' },
   { id: 'accesorios', nombre: 'Accesorios' }
 ];
+const STORAGE_KEY = 'levelupgamer_productos_v1';
 
-export const obtenerProductos = () => productos;
+// Inicializar productos en localStorage si no existen
+const cargarProductos = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {
+    // fallthrough
+  }
+  // guardar iniciales
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(INICIAL_PRODUCTOS));
+  return INICIAL_PRODUCTOS.slice();
+};
+
+let productos = cargarProductos();
+
+const guardarProductos = (lista) => {
+  productos = lista;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+};
+
+export const obtenerProductos = () => productos.slice();
 export const obtenerProductoPorId = (id) => productos.find(p => p.id === parseInt(id));
 export const obtenerProductosPorCategoria = (categoria) => 
-  categoria === 'todos' ? productos : productos.filter(p => p.categoria === categoria);
+  categoria === 'todos' ? productos.slice() : productos.filter(p => p.categoria === categoria);
+
+export const agregarProducto = (producto) => {
+  const nuevo = { ...producto, id: productos.length ? Math.max(...productos.map(p => p.id)) + 1 : 1 };
+  const lista = [...productos, nuevo];
+  guardarProductos(lista);
+  return nuevo;
+};
+
+export const actualizarProducto = (id, cambios) => {
+  const lista = productos.map(p => p.id === parseInt(id) ? { ...p, ...cambios } : p);
+  guardarProductos(lista);
+  return obtenerProductoPorId(id);
+};
+
+export const eliminarProducto = (id) => {
+  const lista = productos.filter(p => p.id !== parseInt(id));
+  guardarProductos(lista);
+  return true;
+};

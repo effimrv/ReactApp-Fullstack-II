@@ -17,7 +17,8 @@ export const authService = {
       email,
       password, // En una app real esto estaría encriptado
       nombre,
-      fechaRegistro: new Date().toISOString()
+      fechaRegistro: new Date().toISOString(),
+      role: email === 'admin@admin.com' ? 'admin' : 'user'
     };
 
     usuarios.push(nuevoUsuario);
@@ -32,13 +33,15 @@ export const authService = {
   // Iniciar sesión
   login: (email, password) => {
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const usuario = usuarios.find(u => u.email === email && u.password === password);
+  const usuario = usuarios.find(u => u.email === email && u.password === password);
     
     if (!usuario) {
       return { exito: false, error: 'Credenciales incorrectas' };
     }
 
-    localStorage.setItem(USUARIO_KEY, JSON.stringify(usuario));
+    // Asegurarnos que el usuario tenga role (compatibilidad con usuarios previos)
+    const usuarioConRole = { ...usuario, role: usuario.role || (usuario.email === 'admin@admin.com' ? 'admin' : 'user') };
+    localStorage.setItem(USUARIO_KEY, JSON.stringify(usuarioConRole));
     return { exito: true, usuario };
   },
 
@@ -50,7 +53,8 @@ export const authService = {
   // Obtener usuario actual
   obtenerUsuarioActual: () => {
     try {
-      return JSON.parse(localStorage.getItem(USUARIO_KEY));
+      const u = JSON.parse(localStorage.getItem(USUARIO_KEY));
+      return u ? { ...u, role: u.role || (u.email === 'admin@admin.com' ? 'admin' : 'user') } : null;
     } catch {
       return null;
     }
