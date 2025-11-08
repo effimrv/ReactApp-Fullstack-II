@@ -98,9 +98,9 @@ const Contacto = () => {
 
         {/* Formulario */}
         <div className="col-lg-6">
-          <div className="card border-0 shadow">
+          <div className="card border-0 shadow contact-card">
             <div className="card-body p-4">
-              <h3 className="card-title mb-4">Envíanos un Mensaje</h3>
+              <h3 className="card-title mb-4 contact-form-title">Envíanos un Mensaje</h3>
               <form onSubmit={manejarEnvio} noValidate>
                 <div className="row g-3">
                   <div className="col-12 col-md-6">

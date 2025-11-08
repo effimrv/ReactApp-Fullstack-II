@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt, FaShieldAlt } from 'react-icons/fa';
 import { authService } from '../Utils/Auth';
 import { carritoUsuarioService } from '../Data/carritoUsuario';
 import { localStorageService } from '../Data/localStorage';
@@ -38,9 +38,10 @@ const Navbar = () => {
   };
 
   const [showAdminModal, setShowAdminModal] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleQuickAdmin = () => {
-    const email = 'admin@admin.com';
+    const email = 'ara.escobar@duoc.cl';
     const password = 'admin';
 
     // Intentar login; si no existe el usuario, registrarlo
@@ -77,11 +78,19 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', manejarClickFuera);
   }, []);
 
+  // Detectar scroll para aplicar clase compacta a la navbar
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <nav className={`navbar navbar-expand-lg navbar-dark sticky-top navbar-solid ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <Link to="/" className="navbar-brand fw-bold fs-3">
-          LevelUp<span className="text-primary">Gamer</span>
+        <Link to="/" className="navbar-brand fw-bold fs-3 neon-glow">
+          LevelUp<span style={{color: 'var(--primary-color)'}}>Gamer</span>
         </Link>
 
         <button 
@@ -137,7 +146,9 @@ const Navbar = () => {
             {/* Botón rápido para pruebas: abrir modal para entrar como admin cuando no hay usuario */}
             {!usuario && (
               <>
-                <button className="btn btn-primary" onClick={() => setShowAdminModal(true)} title="Entrar como admin de pruebas">Entrar como admin</button>
+                <button className="btn btn-outline-primary d-flex align-items-center" onClick={() => setShowAdminModal(true)} title="Entrar como admin de pruebas">
+                  <FaShieldAlt className="me-2" /> Entrar como admin
+                </button>
                 <QuickAdminModal show={showAdminModal} onClose={() => setShowAdminModal(false)} onConfirm={() => { setShowAdminModal(false); handleQuickAdmin(); }} />
               </>
             )}

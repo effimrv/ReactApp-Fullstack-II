@@ -10,9 +10,24 @@
 }
 
 .btn-primary {
-  background: var(--primary-color);
+  background: linear-gradient(90deg, var(--primary-color) 0%, #7CFFB6 100%);
   border: none;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 24px rgba(0,255,102,0.06);
+}
+
+/* Outline primary variant styled as neon border + glow on hover */
+.btn-outline-primary {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1.5px solid rgba(0,255,68,0.9);
+  box-shadow: 0 6px 18px rgba(0,255,68,0.04) inset;
+}
+
+.btn-outline-primary:hover {
+  background: rgba(0,255,68,0.04);
+  color: #ffffff;
+  box-shadow: 0 8px 28px rgba(0,255,68,0.18), 0 0 18px rgba(0,255,68,0.08);
+  transform: translateY(-2px);
 }
 
 .btn-primary:hover {
@@ -23,10 +38,11 @@
 
 /* Cards */
 .card {
-  border: none;
+  border: 1px solid rgba(255,255,255,0.03);
   border-radius: var(--border-radius-lg);
   transition: var(--transition);
-  box-shadow: var(--shadow);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
   overflow: hidden;
 }
 
@@ -61,8 +77,8 @@
   justify-content: center;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
-  background-color: #fff;
-  box-shadow: var(--shadow-sm);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.12));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
   padding: var(--spacing-4);
   box-sizing: border-box;
   min-height: 200px; /* fallback razonable en dispositivos muy pequeños */
@@ -120,14 +136,16 @@
 
 /* Navegación */
 .nav-link {
-  font-weight: 500;
-  color: var(--gray-700);
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 0.95;
   transition: var(--transition);
   padding: 0.5rem 1rem;
 }
 
 .nav-link:hover {
   color: var(--primary-color);
+  text-shadow: 0 8px 20px rgba(0,255,68,0.06);
 }
 
 /* Contenedores */
@@ -141,14 +159,100 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+/* Asegurar que los títulos de las tarjetas y productos se vean en blanco sobre fondo oscuro */
+.card .card-title,
+.card h5,
+.card h6,
+.producto-card .card-title,
+.admin-card .card-title {
+  color: var(--text-primary) !important;
+}
+
 .lead {
   font-weight: 400;
-  color: var(--gray-600);
+  color: var(--text-primary) !important;
+}
+
+/* Forzar texto de descripciones legible sobre fondo oscuro */
+.card-text,
+.producto .card-text,
+.card .card-text,
+.producto-card .card-text,
+.lead,
+.card .small,
+.card small {
+  color: var(--text-primary) !important;
+}
+
+/* También asegurar que los .text-muted dentro de cards no queden demasiado oscuros */
+.card .text-muted {
+  color: rgba(255,255,255,0.8) !important;
 }
 
 /* Fondos y secciones */
 .bg-gradient {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
+/* Dark section for featured products and other blocks that should match the site */
+.bg-dark-section {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.bg-dark-section .lead,
+.bg-dark-section p,
+.bg-dark-section .text-muted {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Hero green style for 'Sobre Nosotros' - bold neon/tech aesthetic */
+.bg-hero-green {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #003210 0%, #006022 45%, #00b84d 100%);
+  color: #ffffff;
+}
+
+.bg-hero-green::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 8px), radial-gradient(circle at 10% 20%, rgba(255,255,255,0.04), transparent 20%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.08), transparent 30%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.bg-hero-green .container { position: relative; z-index: 2; }
+
+.bg-hero-green .lead, .bg-hero-green p { color: rgba(255,255,255,0.95); }
+
+/* Optional decorative neon lines */
+.bg-hero-green .hero-accent {
+  position: absolute;
+  width: 320px;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(0,255,68,0.0), rgba(0,255,68,0.9), rgba(0,255,68,0.0));
+  left: 10%;
+  top: 20%;
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* Make cards inside the hero area blend with the green background */
+.bg-hero-green .card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.bg-hero-green .card .card-body { color: var(--text-primary) !important; }
+
+/* Slight neon subtitle for hero sections */
+.neon-subtle {
+  color: var(--primary-color);
+  text-shadow: 0 0 8px rgba(0,255,128,0.25), 0 0 16px rgba(0,170,100,0.08);
 }
 
 .section-padding {
@@ -167,14 +271,16 @@ h1, h2, h3, h4, h5, h6 {
 /* Inputs y formularios */
 .form-control {
   border-radius: var(--border-radius);
-  border: 1px solid var(--gray-200);
+  border: 1px solid rgba(255,255,255,0.04);
   padding: 0.75rem 1rem;
   transition: var(--transition);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-primary);
 }
 
 .form-control:focus {
-  border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 6px rgba(0,255,102,0.06);
 }
 
 /* Alinear correctamente los botones e input dentro de input-group */

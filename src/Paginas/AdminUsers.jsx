@@ -43,7 +43,7 @@ const AdminUsers = () => {
 
                 <div className="mt-auto">
                   <div className="small text-muted">Registrado: {u.fechaRegistro ? new Date(u.fechaRegistro).toLocaleDateString() : '-'}</div>
-                  <div className="small text-muted">Rol: {u.role || (u.email === 'admin@admin.com' ? 'admin' : 'user')}</div>
+                  <div className="small text-muted">Rol: {u.role || (u.email === 'ara.escobar@duoc.cl' ? 'admin' : 'user')}</div>
                   <div className="d-flex gap-2 mt-2">
                     <button className="btn btn-sm btn-outline-danger" onClick={() => eliminar(u.id)}>Eliminar</button>
                   </div>

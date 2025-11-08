@@ -10,14 +10,14 @@ describe('authService (Utils/Auth.js)', () => {
     localStorage.clear();
   });
 
-  it('registrar asigna role admin para admin@admin.com', async () => {
+  it('registrar asigna role admin para ara.escobar@duoc.cl', async () => {
     const mod = await import('../../Utils/Auth.js');
     const { authService } = mod;
 
-    const res = authService.registrar('admin@admin.com', 'adminpass', 'Admin');
+    const res = authService.registrar('ara.escobar@duoc.cl', 'adminpass', 'Admin');
     expect(res.exito).toBe(true);
     const usuarios = JSON.parse(localStorage.getItem('usuarios'));
-    const u = usuarios.find(x => x.email === 'admin@admin.com');
+    const u = usuarios.find(x => x.email === 'ara.escobar@duoc.cl');
     expect(u).toBeTruthy();
     expect(u.role).toBe('admin');
   });

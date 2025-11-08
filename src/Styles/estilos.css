@@ -1,12 +1,17 @@
 :root {
-  /* Colores principales - Tema moderno y minimalista */
-  --primary-color: #00ff00;          
-  --primary-dark: #00cc00;           
-  --primary-light: #66ff66;          
-  --secondary-color: #7DF9FF;        
-  --accent-color: #7DF9FF;           
-  --success-color: #00ff00;          
-  --danger-color: #ff0000;   
+  /* Colores principales - Tema gamer oscuro (verde neón dominante) */
+  --bg-base: #000000;                  /* fondo negro total */
+  --surface: #070707;                  /* superficies/card */
+  --text-primary: #ffffff;             /* texto principal blanco (máximo contraste) */
+  --text-muted: #9adfab;               /* texto secundario */
+
+  /* Intensificar verde neón */
+  --primary-color: #00ff44;            /* verde neón más intenso */
+  --primary-dark: #00cc52;
+  --primary-light: #66ff9a;
+
+  --accent-blue: #00dfff;              /* azul eléctrico secundario */
+  --danger-color: #ff4d6d;
   
   /* Escala de grises */
   --gray-50: #f8fafc;
@@ -21,7 +26,7 @@
   --gray-900: #1a2744;
   
   /* Tipografía */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family: 'Poppins', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -54,4 +59,164 @@
   /* Transiciones */
   --transition: all 0.2s ease-in-out;
   --transition-slow: all 0.3s ease-in-out;
+}
+
+/* Aplicar fondo negro en toda la página y texto visible */
+html, body, #root {
+  height: 100%;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* Forzar contraste en textos comunes */
+body, p, li, a, span, input, button {
+  color: var(--text-primary);
+}
+
+/* Enlaces y acentos: verde neón por defecto */
+a { color: var(--primary-color); }
+
+/* Efecto neon/glow aplicable a títulos, logo y elementos claves */
+.neon-glow, h1.neon-glow, h2.neon-glow, .navbar-brand.neon-glow {
+  color: var(--text-primary);
+  text-shadow: 0 0 8px rgba(0,255,68,0.28), 0 0 22px rgba(0,255,68,0.12);
+}
+
+/* Glow más sutil para subtítulos */
+.neon-subtle { text-shadow: 0 0 6px rgba(0,255,68,0.10); }
+
+.navbar {
+  background: linear-gradient(90deg, rgba(3,10,6,0.98), rgba(6,18,14,0.98)) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  z-index: 1050;
+  backdrop-filter: none;
+}
+
+.navbar.bg-transparent {
+  background: var(--surface) !important;
+}
+
+.navbar .nav-link {
+  color: rgba(255,255,255,0.95);
+  font-weight: 600;
+}
+
+.navbar .nav-link:hover {
+  color: var(--primary-light);
+  text-shadow: 0 4px 14px rgba(0,255,68,0.06);
+}
+
+.navbar .navbar-brand {
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* Small polish: slightly stronger card contrast and subtle neon edge */
+.card {
+  border: 1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.16));
+}
+
+/* Make the hero band stand out a little more with extra padding */
+.bg-hero-green {
+  padding: var(--spacing-6) 0;
+}
+
+/* Add a thin outline to important buttons to improve visibility */
+.btn-primary, .btn-outline-primary {
+  box-shadow: 0 8px 28px rgba(0,255,68,0.06);
+}
+
+/* Accessibility: increase contrast for small text in muted areas */
+.text-muted {
+  color: rgba(255,255,255,0.78) !important;
+}
+
+/* Buscador de productos: verde temático */
+.buscador-productos .input-group-text {
+  background: linear-gradient(90deg, rgba(0,255,68,0.12), rgba(0,200,100,0.06));
+  border: 1px solid rgba(0,255,68,0.12);
+  color: var(--primary-color);
+}
+
+.buscador-productos .form-control {
+  background: linear-gradient(180deg, rgba(0,255,68,0.04), rgba(0,0,0,0.12));
+  border: 1px solid rgba(0,255,68,0.10);
+  color: var(--text-primary);
+}
+
+.buscador-productos .form-control::placeholder {
+  color: rgba(255,255,255,0.75);
+}
+
+.buscador-productos .form-control:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 16px rgba(0,255,68,0.10);
+  background: rgba(0,255,68,0.03);
+}
+
+@media (max-width: 576px) {
+  .buscador-productos .input-group-text { padding: 0.45rem 0.6rem; }
+  .buscador-productos .form-control { padding: 0.5rem 0.75rem; }
+}
+
+/* Forzar título del formulario de contacto en blanco para mejor visibilidad */
+.contact-form-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.contact-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.22));
+}
+
+.contact-card .form-label,
+.contact-card .card-title,
+.contact-card label {
+  color: #ffffff !important;
+}
+
+.contact-card .form-control,
+.contact-card .form-select,
+.contact-card textarea {
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.contact-card .form-control::placeholder,
+.contact-card textarea::placeholder {
+  color: rgba(255,255,255,0.72) !important;
+}
+
+.contact-card .invalid-feedback {
+  color: #ffb3b3;
+}
+
+.contact-card .form-control:focus {
+  box-shadow: 0 0 18px rgba(0,255,68,0.06);
+  border-color: var(--primary-dark);
+}
+
+.navbar-solid {
+  background: linear-gradient(90deg, rgba(3,10,6,0.98), rgba(6,18,14,0.98));
+  padding: 1rem 0;
+  transition: padding 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.navbar-solid.scrolled {
+  padding: 0.35rem 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  background: linear-gradient(90deg, rgba(3,10,6,1), rgba(6,18,14,1));
+}
+
+.navbar-solid.scrolled .navbar-brand {
+  transform: scale(0.95);
+  transition: transform 220ms ease;
 }

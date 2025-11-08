@@ -7,11 +7,11 @@ const seedAdminUser = () => {
   try {
     const usuariosRaw = localStorage.getItem('usuarios');
     const usuarios = usuariosRaw ? JSON.parse(usuariosRaw) : [];
-    const existeAdmin = usuarios.find(u => u.email === 'admin@admin.com');
+    const existeAdmin = usuarios.find(u => u.email === 'ara.escobar@duoc.cl');
     if (!existeAdmin) {
       const admin = {
         id: Date.now(),
-        email: 'admin@admin.com',
+        email: 'ara.escobar@duoc.cl',
         password: 'admin',
         nombre: 'Administrador',
         fechaRegistro: new Date().toISOString(),
@@ -19,7 +19,7 @@ const seedAdminUser = () => {
       };
       usuarios.push(admin);
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      console.info('[seed] admin creado: admin@admin.com / admin');
+      console.info('[seed] admin creado: ara.escobar@duoc.cl / admin');
     }
   } catch (e) {
     // no bloquear la app si falla el seed

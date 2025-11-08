@@ -1,23 +1,20 @@
 /* Personalizaciones mínimas sobre Bootstrap */
 :root {
-  --primary-color: #7DF9FF;
-  --primary-dark: #7DF9FF;
+  /* Use the neon green as bootstrap primary */
+  --primary-color: #00ff66;
+  --primary-dark: #00cc52;
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background: linear-gradient(90deg, var(--primary-color) 0%, #7CFFB6 100%);
+  border-color: transparent;
+  color: #04100b;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
+  filter: brightness(1.03);
 }
 
-.text-primary {
-  color: var(--primary-color) !important;
-}
+.text-primary { color: var(--primary-color) !important; }
 
-.min-vh-50 {
-  min-height: 50vh;
-}
+.min-vh-50 { min-height: 50vh; }

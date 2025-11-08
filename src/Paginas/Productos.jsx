@@ -28,7 +28,7 @@ const Productos = () => {
       {/* Filtros y Búsqueda */}
       <div className="row mb-4">
         <div className="col-md-6">
-          <div className="input-group">
+          <div className="input-group buscador-productos">
             <span className="input-group-text">
               <FaSearch />
             </span>

@@ -92,11 +92,11 @@ const Home = () => {
       </section>
 
       {/* Productos Destacados */}
-      <section className="py-5 bg-light">
+      <section className="py-5 bg-dark-section">
         <div className="container">
           <div className="text-center mb-5">
-            <h2 className="display-5 fw-bold">Productos Destacados</h2>
-            <p className="lead text-muted">Los productos más populares de nuestra tienda</p>
+            <h2 className="display-5 fw-bold neon-glow">Productos Destacados</h2>
+            <p className="lead" style={{color: 'var(--text-muted)'}}>Los productos más populares de nuestra tienda</p>
           </div>
           
           <div className="row g-4">

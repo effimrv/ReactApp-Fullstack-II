@@ -18,7 +18,7 @@ export const authService = {
       password, // En una app real esto estaría encriptado
       nombre,
       fechaRegistro: new Date().toISOString(),
-      role: email === 'admin@admin.com' ? 'admin' : 'user'
+  role: email === 'ara.escobar@duoc.cl' ? 'admin' : 'user'
     };
 
     usuarios.push(nuevoUsuario);
@@ -40,7 +40,7 @@ export const authService = {
     }
 
     // Asegurarnos que el usuario tenga role (compatibilidad con usuarios previos)
-    const usuarioConRole = { ...usuario, role: usuario.role || (usuario.email === 'admin@admin.com' ? 'admin' : 'user') };
+  const usuarioConRole = { ...usuario, role: usuario.role || (usuario.email === 'ara.escobar@duoc.cl' ? 'admin' : 'user') };
     localStorage.setItem(USUARIO_KEY, JSON.stringify(usuarioConRole));
     return { exito: true, usuario };
   },
@@ -54,7 +54,7 @@ export const authService = {
   obtenerUsuarioActual: () => {
     try {
       const u = JSON.parse(localStorage.getItem(USUARIO_KEY));
-      return u ? { ...u, role: u.role || (u.email === 'admin@admin.com' ? 'admin' : 'user') } : null;
+  return u ? { ...u, role: u.role || (u.email === 'ara.escobar@duoc.cl' ? 'admin' : 'user') } : null;
     } catch {
       return null;
     }
