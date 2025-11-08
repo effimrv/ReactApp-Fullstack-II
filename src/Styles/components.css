@@ -164,8 +164,13 @@ h1, h2, h3, h4, h5, h6 {
 .card h5,
 .card h6,
 .producto-card .card-title,
-.admin-card .card-title {
-  color: var(--text-primary) !important;
+.admin-card .card-title,
+.card-body .card-title,
+.card-body h5,
+.card-body h6 {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .lead {
