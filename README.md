@@ -12,17 +12,72 @@ Bienvenido a LevelUpGamer, una tienda online de periféricos y accesorios gaming
 
 ## Estructura del proyecto
 ```
-levelupgamer-react/
-├── public/
-├── src/
-│   ├── Componentes/
-│   ├── Data/
-│   ├── Paginas/
-│   ├── Styles/
-│   ├── Tests/
-│   └── Utils/
-├── package.json
-└── README.md
+ReactApp-Fullstack-II-1/
+├── 📁 .git/                          # Control de versiones Git
+├── 📄 .gitignore                     # Archivos ignorados por Git
+├── 📄 index.html                     # HTML principal (Vite)
+├── 📄 package.json                   # Dependencias y scripts npm
+├── 📄 package-lock.json             # Lockfile de dependencias
+├── 📄 README.md                      # Documentación del proyecto
+├── 📄 tsconfig.json                  # Configuración TypeScript
+├── 📄 vitest.config.js              # Configuración de Vitest (testing)
+├── 📁 node_modules/                  # Dependencias instaladas
+├── 📁 public/                        # Archivos estáticos públicos
+│   ├── 📄 favicon.ico
+│   ├── 📄 index.html
+│   ├── 📄 logo192.png
+│   ├── 📄 logo512.png
+│   ├── 📄 manifest.json
+│   └── 📄 robots.txt
+└── 📁 src/                           # Código fuente principal
+    ├── 📄 App.jsx                    # Componente raíz de la aplicación
+    ├── 📄 main.jsx                   # Punto de entrada de la app
+    ├── 📁 Componentes/               # Componentes reutilizables
+    │   ├── 📄 AdminProductCard.jsx   # Card de producto para admin
+    │   ├── 📄 Navbar.jsx             # Barra de navegación
+    │   ├── 📄 ProductoCard.jsx       # Card de producto público
+    │   └── 📄 QuickAdminModal.jsx    # Modal de acceso rápido admin
+    ├── 📁 Data/                      # Manejo de datos y estado
+    │   ├── 📄 carritoUsuario.js      # Servicio de carrito por usuario
+    │   ├── 📄 localStorage.js        # Servicio de almacenamiento local
+    │   └── 📄 productos.js           # CRUD de productos + datos inicial
+    ├── 📁 Paginas/                   # Componentes de páginas/rutas
+    │   ├── 📄 AdminDashboard.jsx     # Dashboard administrativo
+    │   ├── 📄 AdminOrders.jsx        # Gestión de órdenes (admin)
+    │   ├── 📄 AdminProducts.jsx      # Gestión de productos (admin)
+    │   ├── 📄 AdminUsers.jsx         # Gestión de usuarios (admin)
+    │   ├── 📄 Carrito.jsx            # Página del carrito de compras
+    │   ├── 📄 Checkout.jsx           # Página de checkout/pago
+    │   ├── 📄 Contacto.jsx           # Página de contacto
+    │   ├── 📄 Home.jsx               # Página principal/inicio
+    │   ├── 📄 Login.jsx              # Página de inicio de sesión
+    │   ├── 📄 Nosotros.jsx           # Página "Acerca de nosotros"
+    │   ├── 📄 OrderResult.jsx        # Página de resultado de orden
+    │   ├── 📄 ProductoDetalle.jsx    # Página de detalle de producto
+    │   ├── 📄 Productos.jsx          # Página de catálogo de productos
+    │   └── 📄 Registro.jsx           # Página de registro de usuario
+    ├── 📁 Styles/                    # Estilos CSS
+    │   ├── 📄 components.css         # Estilos específicos de componentes
+    │   ├── 📄 estilos.css           # Estilos principales del tema
+    │   └── 📄 global.css            # Estilos globales y overrides
+    ├── 📁 Tests/                     # Suite de pruebas
+    │   ├── 📄 App.test.tsx          # Pruebas del componente App
+    │   ├── 📄 setup.js              # Configuración de testing (JS)
+    │   ├── 📄 setup.ts              # Configuración de testing (TS)
+    │   ├── 📁 Componentes/          # Pruebas de componentes
+    │   │   ├── 📄 ExplorarProducts.test.tsx
+    │   │   ├── 📄 Home.test.tsx
+    │   │   └── 📄 Productos.filter.test.tsx
+    │   ├── 📁 integration/          # Pruebas de integración
+    │   │   └── 📄 e2e.checkout.test.tsx
+    │   └── 📁 unitTest/            # Pruebas unitarias
+    │       ├── 📄 auth.test.js      # Pruebas de autenticación
+    │       ├── 📄 productos.test.js # Pruebas CRUD productos
+    │       └── 📄 Validaciones.test.ts # Pruebas de validaciones
+    └── 📁 Utils/                    # Utilidades y servicios
+        ├── 📄 Auth.js               # Servicio de autenticación
+        ├── 📄 ProtectedRoute.jsx    # Componente de rutas protegidas
+        └── 📄 Validaciones.js       # Funciones de validación
 ```
 
 ## Instalación
@@ -46,7 +101,7 @@ Para iniciar la aplicación en modo desarrollo:
 ```bash
 npm run dev
 ```
-La app estará disponible en `http://localhost:3000`.
+La app estará disponible en `La app estará disponible en `http://localhost:5173`.
 
 ## Funcionalidades
 - Página principal con productos destacados
@@ -61,7 +116,11 @@ Ejecuta los tests con:
 npm test
 ```
 ## Para abrir en cmd
-- cd C:\Users\PC01\OneDrive\Desktop\ReactApp-Fullstack-II-1
+- cd "C:\Users\PC01\OneDrive\Desktop\ReactApp-Fullstack-II-1"
+
+## Para hacer commit en el main
+- git push origin main
+  
 ---
 ¡Gracias por visitar LevelUpGamer!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
