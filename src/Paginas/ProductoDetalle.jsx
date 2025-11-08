@@ -141,10 +141,13 @@ const ProductoDetalle = () => {
       </div>
       {/* Toast local */}
       {toast.visible && (
-        <div style={{position: 'fixed', right: 20, top: 80, zIndex: 3000}}>
-          <div className="card shadow" style={{background: 'rgba(0,0,0,0.8)', color: '#fff'}}>
-            <div className="card-body py-2 px-3 small">
-              {toast.message}
+        <div className="toast-notification" role="status" aria-live="polite">
+          <div className="toast-card shadow-lg">
+            <div className="toast-body d-flex align-items-center small">
+              <div className="toast-icon d-inline-flex align-items-center justify-content-center me-3">
+                <FaShoppingCart />
+              </div>
+              <div className="toast-text">{toast.message}</div>
             </div>
           </div>
         </div>

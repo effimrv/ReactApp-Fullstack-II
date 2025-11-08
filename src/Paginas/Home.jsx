@@ -20,34 +20,23 @@ const Home = () => {
 
   return (
     <div>
-      {}
-      <section className="hero-section position-relative py-5" style={{ 
-            minHeight: '80vh',
-            background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-color) 100%)',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }}>
-          <div className="container-fluid py-5 px-5" style={{ width: '100%' }}>
+      <section className="hero-section position-relative py-5 hero-large">
+          <div className="container-fluid py-5 px-5 hero-inner" style={{ width: '100%' }}>
             <div className="row align-items-center justify-content-center">
               <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center" style={{ height: '100%' }}>
-              <h1 className="display-3 fw-bold mb-4 text-white" style={{ letterSpacing: '-0.02em' }}>
-                Eleva tu <span style={{ color: '#ffffffff' }}>Experiencia</span> Gaming
+              <h1 className="display-3 fw-bold mb-4 text-white hero-title" style={{ letterSpacing: '-0.02em' }}>
+                Eleva tu <span className="text-accent">Experiencia</span> Gaming
               </h1>
-                <p className="lead mb-4 text-white-200 text-center" style={{ fontSize: '1.25rem', maxWidth: '500px' }}>
-                Encuentra los periféricos y accesorios más avanzados para maximizar tu rendimiento en el juego.
+                <p className="lead mb-4 text-white text-center hero-sub" style={{ fontSize: '1.25rem', maxWidth: '560px' }}>
+                Encuentra periféricos y accesorios de alto rendimiento. Potencia tu juego con equipo pensado para ganar.
               </p>
-                <Link to="/productos" className="btn btn-light btn-lg" style={{
-                  borderRadius: 'var(--border-radius)',
-                  padding: '0.75rem 2rem',
-                  transition: 'var(--transition)',
-                  boxShadow: 'var(--shadow-md)',
-                  margin: '0 auto',
-                  display: 'block'
-                }}>
+                <Link to="/productos" className="btn btn-hero btn-lg">
                   Explorar Productos <FaArrowRight className="ms-2" />
                 </Link>
+                <div className="mt-4 d-flex gap-3 hero-quick-links">
+                  <Link to="/contacto" className="btn btn-outline-light btn-sm">Contáctanos</Link>
+                  <Link to="/nosotros" className="btn btn-outline-light btn-sm">Conócenos</Link>
+                </div>
             </div>
             <div className="col-lg-6 text-center position-relative">
               <img
@@ -65,6 +54,9 @@ const Home = () => {
                   margin: '0 auto'
                 }}
               />
+              {/* decorative neon stripes */}
+              <div className="hero-stripe hero-stripe-1" />
+              <div className="hero-stripe hero-stripe-2" />
             </div>
           </div>
         </div>
@@ -76,7 +68,7 @@ const Home = () => {
           <div className="row g-4">
             {caracteristicas.map((caracteristica, index) => (
               <div key={index} className="col-md-4">
-                <div className="card border-0 shadow-sm h-100 text-center">
+                <div className="card border-0 shadow-sm h-100 text-center feature-card">
                   <div className="card-body p-4">
                     <div className="text-primary mb-3" style={{fontSize: '3rem'}}>
                       {caracteristica.icono}
@@ -99,7 +91,7 @@ const Home = () => {
             <p className="lead" style={{color: 'var(--text-muted)'}}>Los productos más populares de nuestra tienda</p>
           </div>
           
-          <div className="row g-4">
+          <div className="row g-4 featured-grid">
             {productosDestacados.map(producto => (
               <div key={producto.id} className="col-md-4">
                 <ProductoCard producto={producto} />

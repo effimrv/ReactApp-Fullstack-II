@@ -81,7 +81,7 @@ const Carrito = () => {
                     </p>
                   </div>
                   <div className="col-md-3">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center flex-nowrap">
                       <button 
                         className="btn btn-outline-secondary btn-sm"
                         onClick={() => actualizarCantidad(item.id, item.cantidad - 1)}
@@ -97,15 +97,16 @@ const Carrito = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="col-md-2 text-end">
-                    <h5 className="text-primary">
+                  <div className="col-md-2 d-flex align-items-center justify-content-end">
+                    <h5 className="text-primary mb-0">
                       ${(item.precio * item.cantidad).toLocaleString('es-CL')}
                     </h5>
                   </div>
-                  <div className="col-md-1 text-end">
+                  <div className="col-md-1 d-flex align-items-center justify-content-end">
                     <button 
                       onClick={() => eliminarDelCarrito(item.id)}
-                      className="btn btn-outline-danger btn-sm"
+                      className="btn btn-outline-danger btn-sm align-self-center"
+                      aria-label={`Eliminar ${item.nombre}`}
                     >
                       <FaTrash />
                     </button>
@@ -139,9 +140,9 @@ const Carrito = () => {
                 </div>
               </div>
 
-              <button className="btn btn-primary btn-lg w-100 mb-3">
+              <a href="/checkout" className="btn btn-primary btn-lg w-100 mb-3">
                 Proceder al Pago
-              </button>
+              </a>
 
               <Link to="/productos" className="btn btn-outline-primary w-100">
                 <FaArrowLeft className="me-2" />

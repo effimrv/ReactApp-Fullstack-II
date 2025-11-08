@@ -1,5 +1,6 @@
 
 const CARRITO_KEY = 'levelupgamer_carrito';
+const ORDERS_KEY = 'levelupgamer_orders_v1';
 
 export const localStorageService = {
   obtenerCarrito: () => {
@@ -54,4 +55,30 @@ export const localStorageService = {
     
     return carrito;
   }
+};
+
+// Orders helpers
+localStorageService.crearOrden = (orden) => {
+  try {
+    const ordenes = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+    ordenes.push(orden);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(ordenes));
+    return orden;
+  } catch (e) {
+    console.error('Error creando orden', e);
+    return null;
+  }
+};
+
+localStorageService.obtenerOrdenes = () => {
+  try {
+    return JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+  } catch {
+    return [];
+  }
+};
+
+localStorageService.vaciarCarrito = () => {
+  localStorageService.guardarCarrito([]);
+  return [];
 };

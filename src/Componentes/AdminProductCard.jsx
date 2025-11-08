@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaTimesCircle, FaCheckCircle } from 'react-icons/fa';
 
-const AdminProductCard = ({ producto, onEdit, onDelete }) => {
+const AdminProductCard = ({ producto, onEdit, onDelete, onToggleStock }) => {
   return (
     <div className="card h-100 shadow-sm">
       <div className="position-relative">
@@ -12,12 +12,17 @@ const AdminProductCard = ({ producto, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <div className="card-body d-flex flex-column">
+        <div className="card-body d-flex flex-column">
         <h6 className="card-title mb-1">{producto.nombre}</h6>
         <p className="card-text text-muted small flex-grow-1">{producto.descripcion}</p>
 
         <div className="d-flex justify-content-between align-items-center mt-2">
-          <div className="small text-muted">Stock: {producto.stock}</div>
+          <div className="small text-muted d-flex align-items-center gap-2">
+            <span>Stock: {producto.stock}</span>
+            <button className={`btn btn-sm ${producto.stock > 0 ? 'btn-outline-danger' : 'btn-outline-success'}`} title={producto.stock > 0 ? 'Marcar sin stock' : 'Restaurar stock'} onClick={() => onToggleStock && onToggleStock(producto)}>
+              {producto.stock > 0 ? <FaTimesCircle /> : <FaCheckCircle />}
+            </button>
+          </div>
           <div className="h6 text-primary mb-0">${producto.precio.toLocaleString('es-CL')}</div>
         </div>
       </div>

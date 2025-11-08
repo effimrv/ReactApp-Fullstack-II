@@ -5,6 +5,8 @@ import Home from './Paginas/Home';
 import Productos from './Paginas/Productos';
 import ProductoDetalle from './Paginas/ProductoDetalle';
 import Carrito from './Paginas/Carrito';
+import Checkout from './Paginas/Checkout';
+import OrderResult from './Paginas/OrderResult';
 import Nosotros from './Paginas/Nosotros';
 import Contacto from './Paginas/Contacto';
 import Login from './Paginas/Login';
@@ -33,6 +35,8 @@ function App() {
             <Route path="/productos" element={<Productos />} />
             <Route path="/productos/:id" element={<ProductoDetalle />} />
             <Route path="/carrito" element={<Carrito />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-result" element={<OrderResult />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
