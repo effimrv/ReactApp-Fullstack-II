@@ -687,8 +687,8 @@ a:hover {
 .feature-card .text-primary {
   color: #ffffff !important;
   background: linear-gradient(135deg, rgba(0,255,65,0.2), rgba(0,200,50,0.3));
-  padding: 1rem;
-  border-radius: 50%;
+  padding: 1.2rem;
+  border-radius: var(--border-radius-lg);
   box-shadow: 
     0 8px 24px rgba(0,255,65,0.3),
     0 0 20px rgba(0,255,65,0.2);
@@ -698,6 +698,10 @@ a:hover {
   border: 2px solid rgba(0,255,65,0.4);
   position: relative;
   z-index: 3;
+  width: auto;
+  height: auto;
+  min-width: 80px;
+  min-height: 80px;
 }
 
 .feature-card:hover .text-primary {
@@ -875,6 +879,44 @@ h2.display-5 {
 
 .form-control::placeholder {
   color: rgba(255,255,255,0.6) !important;
+}
+
+/* Estilos específicos para Login y formularios */
+.form-label {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.input-group-text {
+  background: rgba(30,30,30,0.9) !important;
+  border: 2px solid rgba(0,255,65,0.3) !important;
+  color: var(--primary-color) !important;
+}
+
+/* Estilos adicionales para cards de formularios */
+.card .form-control,
+.card .form-select,
+.card-body .form-control,
+.card-body .form-select {
+  background: rgba(20,20,20,0.9) !important;
+  border: 2px solid rgba(0,255,65,0.3) !important;
+  color: #ffffff !important;
+}
+
+.card .form-label,
+.card-body .form-label,
+.card label {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Específico para página de login */
+.card-title {
+  color: #ffffff !important;
+}
+
+.text-muted {
+  color: rgba(255,255,255,0.7) !important;
 }
 
 /* Scroll bar personalizado */

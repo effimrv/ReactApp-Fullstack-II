@@ -91,26 +91,34 @@ const ProductoDetalle = () => {
                     <label className="form-label fw-bold">Cantidad:</label>
                   </div>
                   <div className="col-auto">
-                    <div className="input-group" style={{width: '120px'}}>
+                    <div className="input-group" style={{width: '140px'}}>
                       <button 
                         className="btn btn-outline-secondary"
                         onClick={() => setCantidad(Math.max(1, cantidad - 1))}
+                        disabled={cantidad <= 1}
                       >
                         -
                       </button>
                       <input 
                         type="text" 
-                        className="form-control text-center" 
+                        className="form-control text-center fw-bold" 
                         value={cantidad}
                         readOnly
+                        style={{minWidth: '60px'}}
                       />
                       <button 
                         className="btn btn-outline-secondary"
-                        onClick={() => setCantidad(cantidad + 1)}
+                        onClick={() => setCantidad(Math.min(producto.stock, cantidad + 1))}
+                        disabled={cantidad >= producto.stock}
                       >
                         +
                       </button>
                     </div>
+                  </div>
+                  <div className="col-auto">
+                    <small className="text-muted">
+                      Stock disponible: {producto.stock} unidades
+                    </small>
                   </div>
                 </div>
 

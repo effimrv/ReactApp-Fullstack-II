@@ -25,6 +25,14 @@ const Carrito = () => {
       eliminarDelCarrito(productoId);
       return;
     }
+    
+    // Verificar stock disponible
+    const producto = obtenerProductoPorId(productoId);
+    if (producto && nuevaCantidad > producto.stock) {
+      alert(`Solo hay ${producto.stock} unidades disponibles en stock`);
+      return;
+    }
+    
     localStorageService.actualizarCantidad(productoId, nuevaCantidad);
     cargarCarrito();
     window.dispatchEvent(new Event('storage'));
@@ -37,7 +45,7 @@ const Carrito = () => {
   };
 
   const calcularSubtotal = () => itemsCarrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
-  const calcularEnvio = () => calcularSubtotal() > 50000 ? 0 : 3000;
+  const calcularEnvio = () => calcularSubtotal() > 200000 ? 0 : 3000;
   const calcularTotal = () => calcularSubtotal() + calcularEnvio();
 
   if (itemsCarrito.length === 0) {
@@ -76,22 +84,29 @@ const Carrito = () => {
                   </div>
                   <div className="col-md-4">
                     <h5 className="card-title">{item.nombre}</h5>
-                    <p className="text-primary fw-bold mb-0">
+                    <p className="text-primary fw-bold mb-1">
                       ${item.precio.toLocaleString('es-CL')} c/u
                     </p>
+                    <small className="text-muted">
+                      Stock disponible: {item.stock} unidades
+                    </small>
                   </div>
                   <div className="col-md-3">
-                    <div className="d-flex align-items-center flex-nowrap">
+                    <div className="quantity-counter justify-content-center">
                       <button 
                         className="btn btn-outline-secondary btn-sm"
                         onClick={() => actualizarCantidad(item.id, item.cantidad - 1)}
+                        disabled={item.cantidad <= 1}
                       >
                         <FaMinus />
                       </button>
-                      <span className="mx-3 fw-bold">{item.cantidad}</span>
+                      <span className="quantity-display">
+                        {item.cantidad}
+                      </span>
                       <button 
                         className="btn btn-outline-secondary btn-sm"
                         onClick={() => actualizarCantidad(item.id, item.cantidad + 1)}
+                        disabled={item.cantidad >= item.stock}
                       >
                         <FaPlus />
                       </button>

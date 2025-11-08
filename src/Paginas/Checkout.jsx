@@ -11,7 +11,7 @@ const Checkout = () => {
   }, []);
 
   const calcularSubtotal = () => items.reduce((t, i) => t + (i.precio * i.cantidad), 0);
-  const calcularEnvio = () => calcularSubtotal() > 50000 ? 0 : 3000;
+  const calcularEnvio = () => calcularSubtotal() > 200000 ? 0 : 3000;
   const calcularTotal = () => calcularSubtotal() + calcularEnvio();
 
   const handleResultado = (aceptada) => {

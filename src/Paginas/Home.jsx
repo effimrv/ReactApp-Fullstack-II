@@ -13,7 +13,7 @@ const Home = () => {
   }, []);
 
   const caracteristicas = [
-    { icono: <FaShippingFast />, titulo: 'Envío Gratis', descripcion: 'En compras sobre $50.000' },
+    { icono: <FaShippingFast />, titulo: 'Envío Gratis', descripcion: 'En compras sobre $200.000' },
     { icono: <FaShieldAlt />, titulo: 'Garantía', descripcion: 'Hasta 2 años de garantía' },
     { icono: <FaHeadset />, titulo: 'Soporte', descripcion: 'Asistencia técnica especializada' }
   ];
@@ -40,7 +40,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 text-center position-relative">
               <img
-                src="https://media.istockphoto.com/id/1560833158/es/foto/controlador-de-juego-con-teclado-iluminado-de-color-p%C3%BArpura-en-medio-de-varios-dispositivos.jpg?s=612x612&w=0&k=20&c=VcOavuq_yYYY_prnW6qehysZIA_xxCKOYiTtPUR0XyI="
+                src="https://i.pinimg.com/736x/47/13/e7/4713e77f23a55b5d954c0788a94a5334.jpg?v=3&cache=false"
                 alt="Setup Gaming Profesional"
                 className="img-fluid"
                 style={{
