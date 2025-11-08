@@ -23,8 +23,13 @@ const Login = () => {
     const resultado = authService.login(formData.email, formData.password);
     
     if (resultado.exito) {
-      navigate('/');
-      window.location.reload(); // Recargar para actualizar estado de auth
+      // Redirigir según el rol del usuario
+      if (resultado.usuario.role === 'admin') {
+        window.location.href = '/admin'; // Forzar recarga para admins
+      } else {
+        navigate('/');
+        window.location.reload(); // Recargar para actualizar estado de auth
+      }
     } else {
       setError(resultado.error);
     }

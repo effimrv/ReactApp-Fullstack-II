@@ -30,11 +30,18 @@ const Navbar = () => {
   }, []);
 
   const manejarLogout = () => {
+    const esAdmin = usuario && usuario.role === 'admin';
     authService.logout();
     setUsuario(null);
     setMenuAbierto(false);
     setContadorCarrito(0);
-    navigate('/');
+    
+    // Si era admin, recargar completamente la página para limpiar el estado
+    if (esAdmin) {
+      window.location.href = '/';
+    } else {
+      navigate('/');
+    }
   };
 
   const [showAdminModal, setShowAdminModal] = useState(false);
@@ -48,14 +55,16 @@ const Navbar = () => {
     const intento = authService.login(email, password);
     if (intento && intento.exito) {
       setUsuario(intento.usuario);
-      navigate('/admin');
+      // Forzar recarga de la página para activar las redirecciones
+      window.location.href = '/admin';
       return;
     }
 
     const registro = authService.registrar(email, password, 'Admin Test');
     if (registro && registro.exito) {
       setUsuario(registro.usuario);
-      navigate('/admin');
+      // Forzar recarga de la página para activar las redirecciones
+      window.location.href = '/admin';
       return;
     }
 
@@ -63,7 +72,8 @@ const Navbar = () => {
     const usuarioFake = { id: Date.now(), email, nombre: 'Admin Test', role: 'admin' };
     localStorage.setItem('levelupgamer_usuario', JSON.stringify(usuarioFake));
     setUsuario(usuarioFake);
-    navigate('/admin');
+    // Forzar recarga de la página para activar las redirecciones
+    window.location.href = '/admin';
   };
 
   // Cerrar dropdown cuando se hace click afuera
@@ -89,8 +99,18 @@ const Navbar = () => {
   return (
   <nav className={`navbar navbar-expand-lg navbar-dark sticky-top navbar-solid ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <Link to="/" className="navbar-brand fw-bold fs-3 neon-glow">
+        <Link to={usuario && usuario.role === 'admin' ? '/admin' : '/'} className="navbar-brand fw-bold fs-3 neon-glow">
           LevelUp<span style={{color: 'var(--primary-color)'}}>Gamer</span>
+          {usuario && usuario.role === 'admin' && (
+            <small className="ms-2 badge text-white fw-bold" style={{ 
+              fontSize: '0.8rem', 
+              backgroundColor: '#00bfff',
+              textShadow: '1px 1px 2px rgba(0,0,0,0.7)'
+            }}>
+              <FaShieldAlt className="me-1" />
+              ADMIN
+            </small>
+          )}
         </Link>
 
         <button 
@@ -103,45 +123,70 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active fw-bold' : ''}`}>
-                Inicio
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/productos" className={`nav-link ${location.pathname === '/productos' ? 'active fw-bold' : ''}`}>
-                Productos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/nosotros" className={`nav-link ${location.pathname === '/nosotros' ? 'active fw-bold' : ''}`}>
-                Nosotros
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contacto" className={`nav-link ${location.pathname === '/contacto' ? 'active fw-bold' : ''}`}>
-                Contacto
-              </Link>
-            </li>
-            {usuario && usuario.role === 'admin' && (
+          {/* Solo mostrar navegación normal si NO es admin */}
+          {(!usuario || usuario.role !== 'admin') && (
+            <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <Link to="/admin" className={`nav-link ${location.pathname.startsWith('/admin') ? 'active fw-bold' : ''}`}>
-                  Admin
+                <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active fw-bold' : ''}`}>
+                  Inicio
                 </Link>
               </li>
-            )}
-          </ul>
+              <li className="nav-item">
+                <Link to="/productos" className={`nav-link ${location.pathname === '/productos' ? 'active fw-bold' : ''}`}>
+                  Productos
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/nosotros" className={`nav-link ${location.pathname === '/nosotros' ? 'active fw-bold' : ''}`}>
+                  Nosotros
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/contacto" className={`nav-link ${location.pathname === '/contacto' ? 'active fw-bold' : ''}`}>
+                  Contacto
+                </Link>
+              </li>
+            </ul>
+          )}
+
+          {/* Navegación administrativa solo para admins */}
+          {usuario && usuario.role === 'admin' && (
+            <ul className="navbar-nav mx-auto">
+              <li className="nav-item">
+                <Link to="/admin" className={`nav-link ${location.pathname === '/admin' ? 'active fw-bold' : ''}`}>
+                  Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/admin/products" className={`nav-link ${location.pathname === '/admin/products' ? 'active fw-bold' : ''}`}>
+                  Productos
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/admin/users" className={`nav-link ${location.pathname === '/admin/users' ? 'active fw-bold' : ''}`}>
+                  Usuarios
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/admin/orders" className={`nav-link ${location.pathname === '/admin/orders' ? 'active fw-bold' : ''}`}>
+                  Pedidos
+                </Link>
+              </li>
+            </ul>
+          )}
 
           <div className="d-flex align-items-center gap-2">
-            <Link to="/carrito" className="btn btn-outline-primary position-relative">
-              <FaShoppingCart />
-              {contadorCarrito > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {contadorCarrito}
-                </span>
-              )}
-            </Link>
+            {/* Carrito solo para usuarios normales, no para admins */}
+            {(!usuario || usuario.role !== 'admin') && (
+              <Link to="/carrito" className="btn btn-outline-primary position-relative">
+                <FaShoppingCart />
+                {contadorCarrito > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {contadorCarrito}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Botón rápido para pruebas: abrir modal para entrar como admin cuando no hay usuario */}
             {!usuario && (

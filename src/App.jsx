@@ -14,6 +14,7 @@ import Registro from './Paginas/Registro';
 
 // Admin
 import ProtectedRoute from './Utils/ProtectedRoute';
+import AdminRoute from './Utils/AdminRoute';
 import AdminDashboard from './Paginas/AdminDashboard';
 import AdminProducts from './Paginas/AdminProducts';
 import AdminUsers from './Paginas/AdminUsers';
@@ -31,16 +32,17 @@ function App() {
         <Navbar />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<Productos />} />
-            <Route path="/productos/:id" element={<ProductoDetalle />} />
-            <Route path="/carrito" element={<Carrito />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/order-result" element={<OrderResult />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registro" element={<Registro />} />
+            {/* Rutas públicas y de usuario normal - se redirige a admin si es admin */}
+            <Route path="/" element={<AdminRoute><Home /></AdminRoute>} />
+            <Route path="/productos" element={<AdminRoute><Productos /></AdminRoute>} />
+            <Route path="/productos/:id" element={<AdminRoute><ProductoDetalle /></AdminRoute>} />
+            <Route path="/carrito" element={<AdminRoute><Carrito /></AdminRoute>} />
+            <Route path="/checkout" element={<AdminRoute><Checkout /></AdminRoute>} />
+            <Route path="/order-result" element={<AdminRoute><OrderResult /></AdminRoute>} />
+            <Route path="/nosotros" element={<AdminRoute><Nosotros /></AdminRoute>} />
+            <Route path="/contacto" element={<AdminRoute><Contacto /></AdminRoute>} />
+            <Route path="/login" element={<AdminRoute><Login /></AdminRoute>} />
+            <Route path="/registro" element={<AdminRoute><Registro /></AdminRoute>} />
 
             {/* Admin routes - protegidas */}
             <Route path="/admin" element={<ProtectedRoute adminOnly={true}><AdminDashboard /></ProtectedRoute>} />
