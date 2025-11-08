@@ -54,11 +54,11 @@ describe('E2E flujo carrito -> proceder al pago', () => {
     await waitFor(() => expect(screen.getByText('Tu Carrito de Compras')).toBeInTheDocument());
     expect(screen.getByText('Prod A')).toBeInTheDocument();
 
-    // Click en Proceder al Pago
-    const procederBtn = screen.getByRole('button', { name: /Proceder al Pago/i });
-    await userEvent.click(procederBtn);
+    // Click en Proceder al Pago (es un enlace, no un botón)
+    const procederLink = screen.getByRole('link', { name: /Proceder al Pago/i });
+    await userEvent.click(procederLink);
 
-    // Afirmar que el botón existe y que tras click sigue presente (no hay navegación definida)
-    expect(procederBtn).toBeInTheDocument();
+    // Afirmar que el enlace existe y que tras click sigue presente (no hay navegación definida)
+    expect(procederLink).toBeInTheDocument();
   });
 });
