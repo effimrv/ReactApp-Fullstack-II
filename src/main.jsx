@@ -7,20 +7,55 @@ const seedAdminUser = () => {
   try {
     const usuariosRaw = localStorage.getItem('usuarios');
     const usuarios = usuariosRaw ? JSON.parse(usuariosRaw) : [];
-    const existeAdmin = usuarios.find(u => u.email === 'ara.escobar@duoc.cl');
-    if (!existeAdmin) {
-      const admin = {
-        id: Date.now(),
-        email: 'ara.escobar@duoc.cl',
-        password: 'admin',
-        nombre: 'Administrador',
-        fechaRegistro: new Date().toISOString(),
-        role: 'admin'
-      };
-      usuarios.push(admin);
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      console.info('[seed] admin creado: ara.escobar@duoc.cl / admin');
+    
+    // Eliminar el admin viejo si existe
+    const indexAdminViejo = usuarios.findIndex(u => u.email === 'ara.escobar@duoc.cl');
+    if (indexAdminViejo !== -1) {
+      usuarios.splice(indexAdminViejo, 1);
+      console.info('[seed] admin eliminado: ara.escobar@duoc.cl');
     }
+
+    // Lista de administradores
+    const adminsList = [
+      {
+        email: 'cely.gamer@levelup.com',
+        password: 'gamer123',
+        nombre: 'Administrador'
+      },
+      {
+        email: 'maca.gamer@levelup.com',
+        password: 'gamer123',
+        nombre: 'Administrador'
+      },
+      {
+        email: 'benja.gamer@levelup.com',
+        password: 'gamer123',
+        nombre: 'Administrador'
+      }
+    ];
+
+    // Crear/actualizar cada administrador
+    adminsList.forEach((adminData, index) => {
+      const existeAdmin = usuarios.find(u => u.email === adminData.email);
+      if (!existeAdmin) {
+        const admin = {
+          id: Date.now() + index,
+          email: adminData.email,
+          password: adminData.password,
+          nombre: adminData.nombre,
+          fechaRegistro: new Date().toISOString(),
+          role: 'admin'
+        };
+        usuarios.push(admin);
+        console.info(`[seed] admin creado: ${adminData.email} / ${adminData.password}`);
+      } else if (existeAdmin.nombre !== adminData.nombre) {
+        // Actualizar el nombre si ya existe pero con nombre diferente
+        existeAdmin.nombre = adminData.nombre;
+        console.info(`[seed] admin actualizado: ${adminData.email} - nombre cambiado a "${adminData.nombre}"`);
+      }
+    });
+
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
   } catch (e) {
     // no bloquear la app si falla el seed
     console.warn('No se pudo ejecutar seed de admin', e);

@@ -1,6 +1,16 @@
 
 const USUARIO_KEY = 'levelupgamer_usuario';
 
+// Función para determinar si un email es de admin
+const esEmailAdmin = (email) => {
+  const emailsAdmin = [
+    'cely.gamer@levelup.com',
+    'maca.gamer@levelup.com',
+    'benja.gamer@levelup.com'
+  ];
+  return emailsAdmin.includes(email);
+};
+
 export const authService = {
   // Registrar nuevo usuario
   registrar: (email, password, nombre) => {
@@ -18,7 +28,7 @@ export const authService = {
       password, // En una app real esto estaría encriptado
       nombre,
       fechaRegistro: new Date().toISOString(),
-  role: email === 'ara.escobar@duoc.cl' ? 'admin' : 'user'
+      role: esEmailAdmin(email) ? 'admin' : 'user'
     };
 
     usuarios.push(nuevoUsuario);
@@ -40,7 +50,7 @@ export const authService = {
     }
 
     // Asegurarnos que el usuario tenga role (compatibilidad con usuarios previos)
-  const usuarioConRole = { ...usuario, role: usuario.role || (usuario.email === 'ara.escobar@duoc.cl' ? 'admin' : 'user') };
+    const usuarioConRole = { ...usuario, role: usuario.role || (esEmailAdmin(usuario.email) ? 'admin' : 'user') };
     localStorage.setItem(USUARIO_KEY, JSON.stringify(usuarioConRole));
     return { exito: true, usuario };
   },
@@ -54,7 +64,7 @@ export const authService = {
   obtenerUsuarioActual: () => {
     try {
       const u = JSON.parse(localStorage.getItem(USUARIO_KEY));
-  return u ? { ...u, role: u.role || (u.email === 'ara.escobar@duoc.cl' ? 'admin' : 'user') } : null;
+      return u ? { ...u, role: u.role || (esEmailAdmin(u.email) ? 'admin' : 'user') } : null;
     } catch {
       return null;
     }

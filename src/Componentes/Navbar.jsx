@@ -48,8 +48,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const handleQuickAdmin = () => {
-    const email = 'ara.escobar@duoc.cl';
-    const password = 'admin';
+    const email = 'cely.gamer@levelup.com';
+    const password = 'gamer123';
 
     // Intentar login; si no existe el usuario, registrarlo
     const intento = authService.login(email, password);
@@ -60,7 +60,7 @@ const Navbar = () => {
       return;
     }
 
-    const registro = authService.registrar(email, password, 'Admin Test');
+    const registro = authService.registrar(email, password, 'Administrador');
     if (registro && registro.exito) {
       setUsuario(registro.usuario);
       // Forzar recarga de la página para activar las redirecciones
@@ -69,7 +69,7 @@ const Navbar = () => {
     }
 
     // Fallback: crear directamente el objeto en localStorage
-    const usuarioFake = { id: Date.now(), email, nombre: 'Admin Test', role: 'admin' };
+    const usuarioFake = { id: Date.now(), email, nombre: 'Administrador', role: 'admin' };
     localStorage.setItem('levelupgamer_usuario', JSON.stringify(usuarioFake));
     setUsuario(usuarioFake);
     // Forzar recarga de la página para activar las redirecciones

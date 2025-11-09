@@ -8,7 +8,7 @@ const QuickAdminModal = ({ show, onClose, onConfirm }) => {
       <div className="quick-admin-backdrop" onClick={onClose} />
       <div className="quick-admin-dialog card shadow-sm p-3">
         <h5 className="mb-2">Entrar como admin</h5>
-  <p className="small text-muted">Vas a iniciar sesión como <strong>ara.escobar@duoc.cl</strong>. ¿Deseas continuar?</p>
+        <p className="small text-muted">Vas a iniciar sesión como <strong>cely.gamer@levelup.com</strong>. ¿Deseas continuar?</p>
         <div className="d-flex justify-content-end gap-2 mt-3">
           <button className="btn btn-sm btn-secondary" onClick={onClose}>Cancelar</button>
           <button className="btn btn-sm btn-danger" onClick={onConfirm}>Entrar</button>
