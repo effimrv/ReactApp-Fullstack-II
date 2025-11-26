@@ -61,9 +61,11 @@ const Carrito = () => {
     const val = (codigo || '').trim();
     if (!val) { setMensaje({ type: 'error', text: 'Ingresa un código.' }); return; }
     if (val.toLowerCase() === 'levelup10'.toLowerCase()) {
-      setDescuentoPorcentaje(10);
-      setAplicado(true);
-      setMensaje({ type: 'success', text: 'Cupón aplicado :)' });
+  setDescuentoPorcentaje(10);
+  setAplicado(true);
+  setMensaje({ type: 'success', text: 'Cupón aplicado :)' });
+  // Persistir cupón
+  localStorageService.guardarCupon({ codigo: 'levelup10', porcentaje: 10 });
     } else {
       setMensaje({ type: 'error', text: 'Código inválido.' });
     }
@@ -74,6 +76,8 @@ const Carrito = () => {
     setCodigo('');
     setDescuentoPorcentaje(0);
     setMensaje({ type: 'info', text: 'Cupón eliminado.' });
+  // Eliminar cupón persistente
+  localStorageService.eliminarCupon();
   };
 
   if (itemsCarrito.length === 0) {

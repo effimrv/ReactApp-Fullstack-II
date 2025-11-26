@@ -82,3 +82,32 @@ localStorageService.vaciarCarrito = () => {
   localStorageService.guardarCarrito([]);
   return [];
 };
+
+// Cupón helpers
+const CUPON_KEY = 'levelupgamer_cupon_v1';
+
+localStorageService.guardarCupon = (cupon) => {
+  try {
+    localStorage.setItem(CUPON_KEY, JSON.stringify(cupon));
+    return cupon;
+  } catch {
+    return null;
+  }
+};
+
+localStorageService.obtenerCupon = () => {
+  try {
+    return JSON.parse(localStorage.getItem(CUPON_KEY));
+  } catch {
+    return null;
+  }
+};
+
+localStorageService.eliminarCupon = () => {
+  try {
+    localStorage.removeItem(CUPON_KEY);
+    return true;
+  } catch {
+    return false;
+  }
+};
