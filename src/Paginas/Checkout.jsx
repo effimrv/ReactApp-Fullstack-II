@@ -34,7 +34,6 @@ const Checkout = () => {
 
     if (aceptada) {
       localStorageService.vaciarCarrito();
-      // Dispatch storage event so other components update
       window.dispatchEvent(new Event('storage'));
     }
 

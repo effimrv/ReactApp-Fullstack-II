@@ -6,6 +6,10 @@ import { obtenerProductoPorId } from '../Data/productos';
 
 const Carrito = () => {
   const [itemsCarrito, setItemsCarrito] = useState([]);
+  const [codigo, setCodigo] = useState('');
+  const [aplicado, setAplicado] = useState(false);
+  const [descuentoPorcentaje, setDescuentoPorcentaje] = useState(0);
+  const [mensaje, setMensaje] = useState(null);
 
   useEffect(() => {
     cargarCarrito();
@@ -46,7 +50,31 @@ const Carrito = () => {
 
   const calcularSubtotal = () => itemsCarrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
   const calcularEnvio = () => calcularSubtotal() > 200000 ? 0 : 3000;
-  const calcularTotal = () => calcularSubtotal() + calcularEnvio();
+  const calcularDescuento = (subtotal) => {
+    if (!aplicado || descuentoPorcentaje <= 0) return 0;
+    return Math.round(subtotal * (descuentoPorcentaje / 100));
+  };
+
+  const calcularTotal = () => calcularSubtotal() - calcularDescuento(calcularSubtotal()) + calcularEnvio();
+
+  const aplicarCupon = () => {
+    const val = (codigo || '').trim();
+    if (!val) { setMensaje({ type: 'error', text: 'Ingresa un código.' }); return; }
+    if (val.toLowerCase() === 'level15'.toLowerCase()) {
+      setDescuentoPorcentaje(10);
+      setAplicado(true);
+      setMensaje({ type: 'success', text: 'Cupón aplicado: 10% de descuento.' });
+    } else {
+      setMensaje({ type: 'error', text: 'Código inválido.' });
+    }
+  };
+
+  const quitarCupon = () => {
+    setAplicado(false);
+    setCodigo('');
+    setDescuentoPorcentaje(0);
+    setMensaje({ type: 'info', text: 'Cupón eliminado.' });
+  };
 
   if (itemsCarrito.length === 0) {
     return (
@@ -138,7 +166,26 @@ const Carrito = () => {
               <h4 className="card-title text-center mb-4">Resumen de Compra</h4>
               
               <div className="mb-3">
-                <div className="d-flex justify-content-between mb-2">
+                <div className="d-flex align-items-center mb-2 gap-2">
+                  <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    placeholder="Ingresar código"
+                    value={codigo}
+                    onChange={e => setCodigo(e.target.value)}
+                    style={{maxWidth: '160px'}}
+                    disabled={aplicado}
+                  />
+                  <button className="btn btn-sm btn-outline-primary" onClick={aplicarCupon} disabled={aplicado}>Aplicar</button>
+                  <button className="btn btn-sm btn-outline-secondary" onClick={quitarCupon} disabled={!aplicado}>Quitar</button>
+                </div>
+                {mensaje && (
+                  <div className={`alert ${mensaje.type === 'error' ? 'alert-danger' : mensaje.type === 'success' ? 'alert-success' : 'alert-info'} p-2 mb-2`} role="alert" style={{fontSize: '0.9rem'}}>
+                    {mensaje.text}
+                  </div>
+                )}
+
+                <div className="d-flex justify-content-between mb-2 mt-2">
                   <span>Subtotal ({itemsCarrito.length} productos)</span>
                   <span>${calcularSubtotal().toLocaleString('es-CL')}</span>
                 </div>
@@ -148,6 +195,12 @@ const Carrito = () => {
                     {calcularEnvio() === 0 ? 'Gratis' : `$${calcularEnvio().toLocaleString('es-CL')}`}
                   </span>
                 </div>
+                {aplicado && (
+                  <div className="d-flex justify-content-between text-success mb-2">
+                    <span>Descuento ({descuentoPorcentaje}%)</span>
+                    <strong>-${Math.round(calcularSubtotal() * (descuentoPorcentaje / 100)).toLocaleString('es-CL')}</strong>
+                  </div>
+                )}
                 <hr />
                 <div className="d-flex justify-content-between fw-bold fs-5">
                   <span>Total</span>
