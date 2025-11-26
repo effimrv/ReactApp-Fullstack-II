@@ -340,7 +340,7 @@ const Navbar = () => {
                           </button>
                         </div>
 
-                        <div className="mt-3 small text-white-50">Si tu correo termina en <strong>@levelupgamer.com</strong> serás redirigido a Admin.</div>
+                        {/* mensaje de redirección admin eliminado por el cliente */}
                       </form>
                     </div>
                   </div>
