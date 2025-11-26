@@ -54,7 +54,7 @@ const Navbar = () => {
 
   const handleQuickAdmin = () => {
     const email = 'cely.gamer@levelup.com';
-    const password = 'gamer123';
+  const password = 'levelupgamer';
 
     // Intentar login; si no existe el usuario, registrarlo
     const intento = authService.login(email, password);

@@ -18,18 +18,18 @@ const seedAdminUser = () => {
     // Lista de administradores
     const adminsList = [
       {
-        email: 'cely.gamer@levelup.com',
-        password: 'gamer123',
+        email: 'cely@levelupgamer.com',
+        password: 'level1234',
         nombre: 'Administrador'
       },
       {
-        email: 'maca.gamer@levelup.com',
-        password: 'gamer123',
+        email: 'maca@levelupgamer.com',
+        password: 'level1234',
         nombre: 'Administrador'
       },
       {
-        email: 'benja.gamer@levelup.com',
-        password: 'gamer123',
+        email: 'benja@levelupgamer.com',
+        password: 'level1234',
         nombre: 'Administrador'
       }
     ];
