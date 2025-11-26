@@ -60,10 +60,10 @@ const Carrito = () => {
   const aplicarCupon = () => {
     const val = (codigo || '').trim();
     if (!val) { setMensaje({ type: 'error', text: 'Ingresa un código.' }); return; }
-    if (val.toLowerCase() === 'level15'.toLowerCase()) {
+    if (val.toLowerCase() === 'levelup10'.toLowerCase()) {
       setDescuentoPorcentaje(10);
       setAplicado(true);
-      setMensaje({ type: 'success', text: 'Cupón aplicado: 10% de descuento.' });
+      setMensaje({ type: 'success', text: 'Cupón aplicado :)' });
     } else {
       setMensaje({ type: 'error', text: 'Código inválido.' });
     }
@@ -166,6 +166,18 @@ const Carrito = () => {
               <h4 className="card-title text-center mb-4">Resumen de Compra</h4>
               
               <div className="mb-3">
+                <div className="d-flex justify-content-between mb-2 mt-2">
+                  <span>Subtotal ({itemsCarrito.length} productos)</span>
+                  <span>${calcularSubtotal().toLocaleString('es-CL')}</span>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <span>Envío</span>
+                  <span className={calcularEnvio() === 0 ? 'text-success fw-bold' : ''}>
+                    {calcularEnvio() === 0 ? 'Gratis' : `$${calcularEnvio().toLocaleString('es-CL')}`}
+                  </span>
+                </div>
+
+                {/* Bloque del código de descuento: colocado debajo de Envío y encima de Total */}
                 <div className="d-flex align-items-center mb-2 gap-2">
                   <input
                     type="text"
@@ -185,16 +197,6 @@ const Carrito = () => {
                   </div>
                 )}
 
-                <div className="d-flex justify-content-between mb-2 mt-2">
-                  <span>Subtotal ({itemsCarrito.length} productos)</span>
-                  <span>${calcularSubtotal().toLocaleString('es-CL')}</span>
-                </div>
-                <div className="d-flex justify-content-between mb-2">
-                  <span>Envío</span>
-                  <span className={calcularEnvio() === 0 ? 'text-success fw-bold' : ''}>
-                    {calcularEnvio() === 0 ? 'Gratis' : `$${calcularEnvio().toLocaleString('es-CL')}`}
-                  </span>
-                </div>
                 {aplicado && (
                   <div className="d-flex justify-content-between text-success mb-2">
                     <span>Descuento ({descuentoPorcentaje}%)</span>
