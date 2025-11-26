@@ -4,9 +4,9 @@ import { FaTrashAlt, FaExclamationTriangle, FaUser, FaUserCircle } from 'react-i
 // Función para determinar si un email es de admin
 const esEmailAdmin = (email) => {
   const emailsAdmin = [
-    'cely.gamer@levelup.com',
-    'maca.gamer@levelup.com',
-    'benja.gamer@levelup.com'
+    'cely@levelupgamer.com',
+    'maca@levelupgamer.com',
+    'benja@levelupgamer.com'
   ];
   return emailsAdmin.includes(email);
 };

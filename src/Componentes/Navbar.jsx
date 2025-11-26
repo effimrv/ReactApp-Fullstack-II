@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt, FaShieldAlt } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaBars, FaSignOutAlt, FaShieldAlt, FaSignInAlt } from 'react-icons/fa';
 import { authService } from '../Utils/Auth';
 import { carritoUsuarioService } from '../Data/carritoUsuario';
 import { localStorageService } from '../Data/localStorage';
@@ -46,6 +46,11 @@ const Navbar = () => {
 
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Unified login UI state
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const handleQuickAdmin = () => {
     const email = 'cely.gamer@levelup.com';
@@ -74,6 +79,38 @@ const Navbar = () => {
     setUsuario(usuarioFake);
     // Forzar recarga de la página para activar las redirecciones
     window.location.href = '/admin';
+  };
+
+  // Validate simple email
+  const validarEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    setLoginError('');
+
+    if (!validarEmail(loginEmail)) {
+      setLoginError('Ingresa un correo válido.');
+      return;
+    }
+
+    const domain = (loginEmail.split('@')[1] || '').toLowerCase();
+
+    // Intentar login con authService (si existe)
+    const intento = authService.login(loginEmail, loginPassword);
+    if (intento && intento.exito) {
+      setUsuario(intento.usuario);
+      setShowLoginForm(false);
+      // redirigir según dominio
+      if (domain === 'levelupgamer.com' || domain === 'levelup.com') {
+        window.location.href = '/admin';
+      } else {
+        navigate('/');
+      }
+      return;
+    }
+
+    // Si falla el login, mostrar error (o podrías llamar a registrar si quieres)
+    setLoginError('Credenciales inválidas.');
   };
 
   // Cerrar dropdown cuando se hace click afuera
@@ -188,12 +225,9 @@ const Navbar = () => {
               </Link>
             )}
 
-            {/* Botón rápido para pruebas: abrir modal para entrar como admin cuando no hay usuario */}
+            {/* Quick admin button (kept for tests) */}
             {!usuario && (
               <>
-                <button className="btn btn-outline-primary d-flex align-items-center" onClick={() => setShowAdminModal(true)} title="Entrar como admin de pruebas">
-                  <FaShieldAlt className="me-2" /> Entrar como admin
-                </button>
                 <QuickAdminModal show={showAdminModal} onClose={() => setShowAdminModal(false)} onConfirm={() => { setShowAdminModal(false); handleQuickAdmin(); }} />
               </>
             )}
@@ -234,10 +268,85 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <Link to="/login" className="btn btn-outline-secondary">
-                <FaUser className="me-1" />
-                Iniciar Sesión
-              </Link>
+              // Unified login button + dropdown form
+              <>
+                <Link to="/registro" className="btn btn-success me-2 d-flex align-items-center">
+                  Crear cuenta
+                </Link>
+
+                <div className="position-relative">
+                <button
+                  className="btn btn-outline-secondary d-flex align-items-center"
+                  onClick={() => { setShowLoginForm((s) => !s); setLoginError(''); }}
+                  aria-expanded={showLoginForm}
+                >
+                  <FaSignInAlt className="me-1" />
+                  Iniciar Sesión
+                </button>
+
+                {showLoginForm && (
+                  <div className="position-absolute end-0 mt-2" style={{ zIndex: 2000 }}>
+                    <div
+                      className="card"
+                      style={{
+                        minWidth: 320,
+                        background: 'rgba(0,0,0,0.9)', // sólido oscuro
+                        borderRadius: '12px',
+                        padding: '18px',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
+                      }}
+                    >
+                      <form onSubmit={handleLoginSubmit}>
+                        <div className="mb-3">
+                          <label className="form-label fw-semibold">Correo</label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            value={loginEmail}
+                            onChange={(e) => setLoginEmail(e.target.value)}
+                            required
+                            style={{
+                              background: '#0b0b0b',
+                              border: '1px solid rgba(0,200,100,0.15)',
+                              boxShadow: 'inset 0 0 18px rgba(0,200,100,0.04)'
+                            }}
+                          />
+                        </div>
+
+                        <div className="mb-3">
+                          <label className="form-label fw-semibold">Contraseña</label>
+                          <input
+                            type="password"
+                            className="form-control"
+                            value={loginPassword}
+                            onChange={(e) => setLoginPassword(e.target.value)}
+                            required
+                            style={{
+                              background: '#0b0b0b',
+                              border: '1px solid rgba(0,200,100,0.15)',
+                              boxShadow: 'inset 0 0 18px rgba(0,200,100,0.04)'
+                            }}
+                          />
+                        </div>
+
+                        {loginError && <div className="text-danger small mb-2">{loginError}</div>}
+
+                        <div className="d-flex" style={{ gap: 12 }}>
+                          <button type="submit" className="btn btn-success flex-fill" style={{ padding: '16px 18px', borderRadius: 12 }}>
+                            ENTRAR
+                          </button>
+                          <button type="button" className="btn btn-primary" onClick={() => setShowLoginForm(false)} style={{ padding: '12px 16px', borderRadius: 12 }}>
+                            CANCELAR
+                          </button>
+                        </div>
+
+                        <div className="mt-3 small text-white-50">Si tu correo termina en <strong>@levelupgamer.com</strong> serás redirigido a Admin.</div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+                </div>
+              </>
             )}
           </div>
         </div>
